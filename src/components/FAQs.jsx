@@ -36,10 +36,10 @@ export const FAQ = () => (
       <div className="relative z-10 container px-2 sm:px-8 lg:px-4 mx-auto w-11/12 sm:w-full">
         <div className="md:max-w-4xl mx-auto">
           <p className="text-2xl lg:text-2xl xl:text-4xl font-bold text-center">Have any questions?</p>
-          <h2 className="block-big-title ext-lg mt-4 text-slate-500 max-w-xl block-subtitle text-center">
+          <h2 className="mt-4 text-slate-500 max-w-xl text-center mx-auto">
             Frequently Asked Questions
           </h2>
-          <div className="mb-4 flex flex-wrap -m-1">
+          <div className="mb-2 flex flex-wrap -m-1">
             {FAQData.map((item, index) => (
               <div className="w-full p-1" key={`${item.question}-${index}`}>
                 <FAQBox
