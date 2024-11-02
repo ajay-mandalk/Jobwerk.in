@@ -1,0 +1,49 @@
+
+
+---
+import ShowcaseCard from './ShowcaseCard.astro';
+
+const dies = [
+  {
+    title: "Injection Mold Die",
+    description: "Perfect for high-volume plastic parts production with complex geometries.",
+    imageUrl: "/images/mold1.jpg",
+    features: [
+      "High precision tolerances",
+      "Multiple cavity options",
+      "Quick cycle times",
+      "Suitable for most polymers"
+    ]
+  },
+  {
+    title: "Compression Mold Die",
+    description: "Ideal for thermoset materials and large structural parts.",
+    imageUrl: "/images/mold2.jpg",
+    features: [
+      "Excellent material flow",
+      "Low maintenance",
+      "Minimal material waste",
+      "Superior surface finish"
+    ]
+  },
+  {
+    title: "Transfer Mold Die",
+    description: "Specialized for intricate parts with complex geometries.",
+    imageUrl: "/images/mold4.jpg",
+    features: [
+      "High dimensional accuracy",
+      "Perfect for inserts",
+      "Consistent quality",
+      "Cost-effective production"
+    ]
+  }
+];
+---
+<section id="showcase" class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Our Die Solutions</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {dies.map(die => <ShowcaseCard {...die} />)}
+    </div>
+  </div>
+</section>
