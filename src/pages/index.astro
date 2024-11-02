@@ -4,18 +4,20 @@ import Cta from "../components/Cta.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 import Services from "../components/Services.astro";
-import {FAQ} from '../components/FAQs';
+// import {FAQ} from '../components/FAQs';
 
 
 
 ---
 
 <Layout title="">
+
   <Container>
+   
     <Hero />
     <Services />
     <Cta />
-    <FAQ client:load/>
+    <!-- <FAQ client:load/> -->
  
   </Container>
 </Layout>

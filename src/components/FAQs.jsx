@@ -25,7 +25,7 @@ const FAQData = [
 ];
 
 export const FAQ = () => (
-  <section className="relative mt-8 sm:mt-0 pt-12 sm:pt-16 pb-16 bg-blueGray-50 overflow-hidden">
+  <section className="relative mt-4 sm:mt-0 pt-10 sm:pt-7 pb-8 bg-blueGray-50 overflow-hidden">
     <div className="absolute-top-10" id="FAQ" />
     <motion.div
       initial={{ opacity: 0 }}
@@ -33,7 +33,7 @@ export const FAQ = () => (
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <div className="relative z-10 container px-2 sm:px-8 lg:px-4 mx-auto w-11/12 sm:w-full">
+      <div className="relative z-10 container px-2 sm:px-8 lg:px-4 mx-auto w-10/11 sm:w-full">
         <div className="md:max-w-4xl mx-auto">
           <p className="text-2xl lg:text-2xl xl:text-4xl font-bold text-center">Have any questions?</p>
           <h2 className="mt-4 text-slate-500 max-w-xl text-center mx-auto">
@@ -62,7 +62,7 @@ const FAQBox = ({ defaultOpen, title, content }) => {
 
   return (
     <div
-      className="pt-2 sm:pt-4 pb-2 px-3 sm:px-8 rounded-3xl mb-4 relative cursor-pointer transition"
+      className="rounded-2xl  relative cursor-pointer transition"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div className="flex flex-col p-2  justify-center items-start">
@@ -75,9 +75,9 @@ const FAQBox = ({ defaultOpen, title, content }) => {
           {content}
         </p>
       </div>
-      <div className="absolute top-6 right-4 sm:top-8 sm:right-8">
+      <div className="absolute top-4 right-4 sm:top-4 sm:right-8">
         <svg
-          width="28px"
+          width="14px"
           height="30px"
           viewBox="0 0 20 20"
           fill="none"
