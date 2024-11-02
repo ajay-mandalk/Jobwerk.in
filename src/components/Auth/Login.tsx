@@ -3,7 +3,7 @@ import { supabase } from '../../lib/supabase';
 
 type AuthMode = 'login' | 'signup';
 
-export default function AuthForm() {
+export function Login() {
   const [mode, setMode] = useState<AuthMode>('login');
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -134,3 +134,6 @@ export default function AuthForm() {
     </div>
   );
 }
+
+
+

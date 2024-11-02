@@ -13,7 +13,7 @@ export const AnimatedBanner = () => {
           duration: 1.5,
           ease: "easeInOut",
           repeat: Infinity,
-          repeatDelay: 0.2
+          repeatDelay: 5
         }}
       />
     );
