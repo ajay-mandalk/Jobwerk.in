@@ -1,4 +1,4 @@
-import { a3 as AstroUserError } from './chunks/astro_KUeRXzZw.mjs';
+import { z as AstroUserError } from './chunks/astro/assets-service_LSOKjKXA.mjs';
 import React, { createElement } from 'react';
 import ReactDOM from 'react-dom/server';
 
@@ -146,7 +146,7 @@ async function renderToStaticMarkup(Component, props, { default: children, ...sl
 	const newChildren = children ?? props.children;
 	if (children && opts.experimentalReactChildren) {
 		attrs['data-react-children'] = true;
-		const convert = await import('./chunks/vnode-children_FARwNB3u.mjs').then((mod) => mod.default);
+		const convert = await import('./chunks/vnode-children_BkR_XoPb.mjs').then((mod) => mod.default);
 		newProps.children = convert(children);
 	} else if (newChildren != null) {
 		newProps.children = React.createElement(StaticHtml, {

@@ -1,19 +1,15 @@
 import { renderers } from './renderers.mjs';
-import { l as levels, g as getEventPrefix, L as Logger, A as AstroIntegrationLogger, manifest } from './manifest_yPC1pjWQ.mjs';
-import 'node:fs';
-import { e as appendForwardSlash, j as joinPaths, t as trimSlashes, f as fileExtension, s as slash, p as prependForwardSlash, g as removeTrailingForwardSlash } from './chunks/astro/assets-service_Tr2ri7Jo.mjs';
-import { R as ROUTE_TYPE_HEADER, p as REROUTE_DIRECTIVE_HEADER, A as AstroError, q as i18nNoLocaleFoundInPath, t as ResponseSentError, u as MiddlewareNoDataOrNextCalled, v as MiddlewareNotAResponse, G as GetStaticPathsRequired, w as InvalidGetStaticPathsReturn, x as InvalidGetStaticPathsEntry, y as GetStaticPathsExpectedParams, z as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, D as DEFAULT_404_COMPONENT, N as NoMatchingStaticPathFound, B as PrerenderDynamicEndpointPathCollide, C as ReservedSlotName, H as renderSlotToString, J as renderJSX, K as chunkToString, O as isRenderInstruction, Q as LocalsNotAnObject, S as clientLocalsSymbol, T as clientAddressSymbol$1, V as PrerenderClientAddressNotAvailable, W as ClientAddressNotAvailable, X as StaticClientAddressNotAvailable, Y as RewriteWithBodyUsed, Z as renderPage, _ as renderEndpoint, $ as ASTRO_VERSION, a0 as AstroResponseHeadersReassigned, a1 as responseSentSymbol$1, a2 as REROUTABLE_STATUS_CODES } from './chunks/astro_KUeRXzZw.mjs';
+import { l as levels, g as getEventPrefix, L as Logger, A as AstroIntegrationLogger, m as manifest } from './chunks/_@astrojs-manifest_GdvPQkMU.mjs';
+import { A as AstroError, i as i18nNoLocaleFoundInPath, f as appendForwardSlash, j as joinPaths, R as ResponseSentError, g as MiddlewareNoDataOrNextCalled, h as MiddlewareNotAResponse, G as GetStaticPathsRequired, k as InvalidGetStaticPathsReturn, l as InvalidGetStaticPathsEntry, m as GetStaticPathsExpectedParams, n as GetStaticPathsInvalidRouteParam, t as trimSlashes, P as PageNumberParamNotFound, o as NoMatchingStaticPathFound, p as PrerenderDynamicEndpointPathCollide, q as ReservedSlotName, L as LocalsNotAnObject, r as PrerenderClientAddressNotAvailable, C as ClientAddressNotAvailable, S as StaticClientAddressNotAvailable, s as RewriteWithBodyUsed, u as AstroResponseHeadersReassigned, v as fileExtension, w as slash, x as prependForwardSlash, y as removeTrailingForwardSlash } from './chunks/astro/assets-service_LSOKjKXA.mjs';
+import { R as ROUTE_TYPE_HEADER, a as REROUTE_DIRECTIVE_HEADER, D as DEFAULT_404_COMPONENT, r as renderSlotToString, b as renderJSX, c as chunkToString, i as isRenderInstruction, d as clientLocalsSymbol, e as clientAddressSymbol$1, f as renderPage, g as renderEndpoint, A as ASTRO_VERSION, h as responseSentSymbol$1, j as REROUTABLE_STATUS_CODES } from './chunks/astro/server_DsyJV9ni.mjs';
 import { serialize, parse } from 'cookie';
 import 'html-escaper';
 import 'clsx';
 import 'kleur/colors';
+import 'fast-glob';
+import nodePath from 'node:path';
 import buffer from 'node:buffer';
 import crypto from 'node:crypto';
-import nodePath from 'node:path';
-import 'node:url';
-import 'fast-glob';
-import 'node:fs/promises';
-import 'node:module';
 import { onRequest } from './_noop-middleware.mjs';
 
 function shouldAppendForwardSlash(trailingSlash, buildFormat) {
@@ -2423,17 +2419,17 @@ const createExports = (manifest, { middlewareSecret, skewProtection }) => {
   return { default: handler };
 };
 
-const _page0 = () => import('./chunks/generic_jdTFORuk.mjs');
-const _page1 = () => import('./chunks/index_UdYZExxG.mjs');
-const _page2 = () => import('./chunks/Login_nvEIolQc.mjs');
-const _page3 = () => import('./chunks/success_0WBqaob6.mjs');
-const _page4 = () => import('./chunks/UserQuery_YrsuQiK-.mjs');
+const _page0 = () => import('./pages/_image.astro.mjs');
+const _page1 = () => import('./pages/login.astro.mjs');
+const _page2 = () => import('./pages/success.astro.mjs');
+const _page3 = () => import('./pages/userquery.astro.mjs');
+const _page4 = () => import('./pages/index.astro.mjs');
 const pageMap = new Map([
-    ["../../../AppData/Local/pnpm/global/5/.pnpm/astro@4.2.8/node_modules/astro/dist/assets/endpoint/generic.js", _page0],
-    ["src/pages/index.astro", _page1],
-    ["src/pages/Login.astro", _page2],
-    ["src/pages/success.astro", _page3],
-    ["src/pages/UserQuery.astro", _page4]
+    ["node_modules/astro/dist/assets/endpoint/generic.js", _page0],
+    ["src/pages/Login.astro", _page1],
+    ["src/pages/success.astro", _page2],
+    ["src/pages/UserQuery.astro", _page3],
+    ["src/pages/index.astro", _page4]
 ]);
 
 const _manifest = Object.assign(manifest, {
@@ -2442,7 +2438,7 @@ const _manifest = Object.assign(manifest, {
     middleware: onRequest
 });
 const _args = {
-    "middlewareSecret": "62653f40-ffa0-4af1-a40d-49578b95b60c",
+    "middlewareSecret": "236df352-cf05-43a4-8450-083f4b313494",
     "skewProtection": false
 };
 const _exports = createExports(_manifest, _args);

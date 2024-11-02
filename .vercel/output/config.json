@@ -16,10 +16,6 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^\\/$",
-			"dest": "_render"
-		},
-		{
 			"src": "^\\/Login\\/?$",
 			"dest": "_render"
 		},
@@ -29,6 +25,10 @@
 		},
 		{
 			"src": "^\\/UserQuery\\/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/$",
 			"dest": "_render"
 		}
 	]
