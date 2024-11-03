@@ -10,10 +10,7 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-    includeFiles: [
-      './dist/**/*',
-      './.vercel/output/_functions/**/*'
-    ],
+
     functionPerRoute: true, // This helps with route-specific bundling
     maxDuration: 60
   }),

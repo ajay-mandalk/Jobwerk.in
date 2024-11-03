@@ -13,23 +13,35 @@
 		},
 		{
 			"src": "^\\/_image$",
-			"dest": "_render"
+			"dest": "_image.astro"
+		},
+		{
+			"src": "^\\/about\\/?$",
+			"dest": "about.astro"
+		},
+		{
+			"src": "^\\/BookOrder\\/?$",
+			"dest": "BookOrder.astro"
 		},
 		{
 			"src": "^\\/Login\\/?$",
-			"dest": "_render"
+			"dest": "Login.astro"
+		},
+		{
+			"src": "^\\/Services\\/?$",
+			"dest": "Services.astro"
 		},
 		{
 			"src": "^\\/success\\/?$",
-			"dest": "_render"
+			"dest": "success.astro"
 		},
 		{
 			"src": "^\\/UserQuery\\/?$",
-			"dest": "_render"
+			"dest": "UserQuery.astro"
 		},
 		{
 			"src": "^\\/$",
-			"dest": "_render"
+			"dest": "index.astro"
 		}
 	]
 }
