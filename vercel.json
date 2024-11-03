@@ -3,10 +3,17 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "astro",
+  "outputDirectory": "dist",
   "functions": {
     "api/*.js": {
       "memory": 1024,
       "maxDuration": 60
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/entry.js"
+    }
+  ]
 }
