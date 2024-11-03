@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
 
 type AuthMode = 'login' | 'signup';
@@ -6,12 +6,32 @@ type AuthMode = 'login' | 'signup';
 export function Login() {
   const [mode, setMode] = useState<AuthMode>('login');
   const [loading, setLoading] = useState(false);
+  const [signupEnabled, setSignupEnabled] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     name: '',
   });
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkSignupStatus = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('config')
+          .select('signup_enabled')
+          .single();
+        
+        if (error) throw error;
+        setSignupEnabled(data?.signup_enabled ?? true);
+      } catch (err) {
+        console.error('Error checking signup status:', err);
+        setSignupEnabled(true);
+      }
+    };
+
+    checkSignupStatus();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,6 +40,10 @@ export function Login() {
 
     try {
       if (mode === 'signup') {
+        if (!signupEnabled) {
+          throw new Error('Sign up is currently disabled');
+        }
+
         const { error: signUpError } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
@@ -33,12 +57,18 @@ export function Login() {
         if (signUpError) throw signUpError;
         alert('Check your email for the confirmation link!');
       } else {
-        const { error: signInError } = await supabase.auth.signInWithPassword({
+        const { data, error: signInError } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
         });
 
         if (signInError) throw signInError;
+        
+        // Check if authentication was successful
+        if (data && data.user) {
+          // Use window.location.href for client-side navigation to success page
+          window.location.href = '/success';
+        }
       }
     } catch (error: any) {
       setError(error.message);
@@ -83,7 +113,6 @@ export function Login() {
             Email
           </label>
           <input
-
             type="email"
             required
             aria-label="Email address"
@@ -114,26 +143,26 @@ export function Login() {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || (mode === 'signup' && !signupEnabled)}
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
         >
           {loading ? 'Processing...' : mode === 'login' ? 'Login' : 'Sign Up'}
         </button>
       </form>
 
-      <div className="mt-4 text-center">
-        <button
-          onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
-          className="text-blue-600 hover:text-blue-800"
-        >
-          {mode === 'login'
-            ? "Don't have an account? Sign Up"
-            : 'Already have an account? Login'}
-        </button>
-      </div>
+      {signupEnabled && (
+        <div className="mt-4 text-center">
+          <button
+            type='button'
+            onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
+            className="text-blue-600 hover:text-blue-800"
+          >
+            {mode === 'login'
+              ? "Don't have an account? Sign Up"
+              : 'Already have an account? Login'}
+          </button>
+        </div>           
+      )}
     </div>
   );
 }
-
-
-

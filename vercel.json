@@ -2,5 +2,11 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "astro"
+  "framework": "astro",
+  "functions": {
+    "api/*.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  }
 }

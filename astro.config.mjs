@@ -1,20 +1,35 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
+import vercel from '@astrojs/vercel/serverless';
+import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 import icon from "astro-icon";
-import vercel from "@astrojs/vercel/serverless";
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react(), icon()],
-  output: "server",
+  output: 'server',
   adapter: vercel({
     webAnalytics: {
       enabled: true,
     },
+    includeFiles: [
+      './dist/**/*',
+      './.vercel/output/_functions/**/*'
+    ],
+    functionPerRoute: true, // This helps with route-specific bundling
     maxDuration: 60
   }),
-  server: {
-    host: true
+  integrations: [
+    tailwind(),
+    react(),
+    icon()
+  ],
+  vite: {
+    build: {
+      assetsInlineLimit: 0,
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      }
+    }
   }
 });

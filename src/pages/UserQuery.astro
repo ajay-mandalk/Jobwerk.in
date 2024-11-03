@@ -60,7 +60,7 @@ if (Astro.request.method === "POST") {
 
 <!-- Update the form to handle file uploads -->
 <Navbar />
-<div class="max-w-2xl mx-auto px-4">
+<div class="max-w-2xl mx-auto px-4 py-6">
   {
     errormessage && (
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -70,7 +70,7 @@ if (Astro.request.method === "POST") {
   }
 
   <form
-    class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md"
+    class="mx-auto p-6 bg-white rounded-lg shadow-md"
     method="POST"
     enctype="multipart/form-data"
   >
