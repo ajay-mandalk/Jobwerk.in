@@ -15,7 +15,9 @@ export default defineConfig({
     maxDuration: 60
   }),
   integrations: [
-    tailwind(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
     react(),
     icon()
   ],

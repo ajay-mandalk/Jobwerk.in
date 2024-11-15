@@ -1,0 +1,128 @@
+---
+// Import any required utilities
+import { cn } from "@/lib/utils";
+
+// You can make these dynamic through props or CMS
+const announcement = {
+  isActive: true,
+  text: "New: Advanced Injection Molding Monitoring System Now Available",
+  link: "/products/monitoring-system",
+  badge: "New Feature",
+  endDate: "2024-04-30"
+};
+---
+
+<div class="w-full bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800">
+  {announcement.isActive && (
+    <div id="announcement-banner" class="max-w-[85rem] mx-auto" >
+      <div class="relative overflow-hidden px-4 py-2.5">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+          <svg class="h-full w-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h80v80H0z" fill="url(#pattern)" />
+            <defs>
+              <pattern id="pattern" patternContentUnits="objectBoundingBox" width=".125" height=".125">
+                <path fill="currentColor" d="M0 0h1v1H0z" />
+              </pattern>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <div class="relative flex items-center justify-center gap-x-3 gap-y-2 flex-wrap">
+          <!-- Badge -->
+          <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-white text-blue-900">
+            {announcement.badge}
+            <span class="flex size-2">
+              <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-500 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+            </span>
+          </span>
+
+          <!-- Message -->
+          <p class="text-white text-sm sm:text-base font-medium">
+            {announcement.text}
+          </p>
+
+          <!-- CTA Button -->
+          <a
+            href={announcement.link}
+            class="inline-flex items-center gap-x-2 text-sm font-semibold text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full py-1.5 px-4 transition-colors duration-200"
+          >
+            Learn more
+            <svg
+              class="size-4 animate-bounce-x"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+
+          <!-- Close Button -->
+          <button
+            type="button"
+            id="close-announcement"
+            class="absolute end-2 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-200"
+          >
+            <span class="sr-only">Close</span>
+            <svg class="size-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  @keyframes bounce-x {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(25%);
+    }
+  }
+  .animate-bounce-x {
+    animation: bounce-x 1s infinite;
+  }
+</style>
+
+
+
+<script>
+  const closeButton = document.getElementById('close-announcement');
+  const announcementBanner = document.getElementById('announcement-banner');
+
+  // Simple close button handler
+  closeButton?.addEventListener('click', () => {
+    if (announcementBanner) {
+      announcementBanner.classList.add('hidden');
+      // Store the close timestamp
+      localStorage.setItem('announcementClosed', new Date().toISOString());
+    }
+  });
+
+  function checkAndShowAnnouncement() {
+    const lastClosed = localStorage.getItem('announcementClosed');
+    if (lastClosed && announcementBanner?.classList.contains('hidden')) {
+      // Show the banner if it's hidden
+      announcementBanner.classList.remove('hidden');
+    }
+  }
+
+  // Check on page load
+  document.addEventListener('DOMContentLoaded', checkAndShowAnnouncement);
+
+  // Check every 10 seconds
+  setInterval(checkAndShowAnnouncement, 10000);
+</script>

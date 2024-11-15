@@ -1,16 +1,133 @@
 ---
 import Link from "../components/ui/Link.astro";
+
+const ctaContent = {
+  isActive: true,
+  title: "Get Best Quote with Jobwerk™",
+  badge: "Limited Time",
+  description: "Streamline your procurement process and secure competitive quotes for your injection molding needs",
+  buttonText: "Quote & Source Your Parts",
+  buttonLink: "/BookOrder"
+};
 ---
 
-<div
-  class="bg-blue-800 p-8 md:px-20 md:py-20 mt-20 mx-auto max-w-5xl rounded-lg flex flex-col items-center text-center">
-  <h2 class="text-white text-4xl md:text-6xl tracking-tight">
-    Get Best Quote with Jobwerk™
-  </h2>
-  <p class="text-slate-400 mt-4 text-lg md:text-xl ">
-  manufacturer to streamline procurement and secure competitive quotes for Business needs.
-  </p>
-  <div class="flex mt-5 font-semibold">
-    <Link href="#" style="inverted">Quote & Source Your Parts</Link>
+{ctaContent.isActive && (
+  <div
+    id="ctaPopup"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="max-w-4xl w-full mx-4">
+      <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-700 via-blue-700 to-blue-700">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+          <svg class="h-full w-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h80v80H0z" fill="url(#pattern)" />
+            <defs>
+              <pattern id="pattern" patternContentUnits="objectBoundingBox" width=".125" height=".125">
+                <path fill="currentColor" d="M0 0h1v1H0z" />
+              </pattern>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Content Container -->
+        <div class="relative px-6 py-12 md:px-12 md:py-16">
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+            <!-- Badge -->
+            <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-white text-blue-900">
+              {ctaContent.badge}
+              <span class="flex size-2">
+                <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-500 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+              </span>
+            </span>
+
+            <!-- Title -->
+            <h2 class="mt-4 text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+              {ctaContent.title}
+            </h2>
+
+            <!-- Description -->
+            <p class="mt-4 text-slate-200 text-lg md:text-xl">
+              {ctaContent.description}
+            </p>
+
+            <!-- CTA Button -->
+            <div class="mt-8">
+              <a
+                href={ctaContent.buttonLink}
+                class="inline-flex items-center gap-x-2 text-base font-semibold text-blue-900 bg-white hover:bg-blue-50 rounded-lg py-3 px-6 transition-colors duration-200"
+              >
+                {ctaContent.buttonText}
+                <svg
+                  class="size-5 animate-bounce-x"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Close Button -->
+          <button
+            type="button"
+            id="closePopup"
+            class="absolute end-4 top-4 rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-200"
+          >
+            <span class="sr-only">Close</span>
+            <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+)}
+
+<style>
+  @keyframes bounce-x {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(25%);
+    }
+  }
+  .animate-bounce-x {
+    animation: bounce-x 1s infinite;
+  }
+</style>
+
+<script>
+
+  // Show popup after 3 seconds
+  setTimeout(() => {
+    const popup = document.getElementById('ctaPopup');
+    if (popup) popup.classList.remove('hidden');
+  }, 3000);
+
+  // Close popup when clicking the close button
+  document.getElementById('closePopup')?.addEventListener('click', () => {
+    const popup = document.getElementById('ctaPopup');
+    if (popup) popup.classList.add('hidden');
+  });
+
+  // Close popup when clicking outside
+  document.getElementById('ctaPopup')?.addEventListener('click', (e: MouseEvent) => {
+    if ((e.target as HTMLElement).id === 'ctaPopup') {
+      const popup = document.getElementById('ctaPopup');
+      if (popup) popup.classList.add('hidden');
+    }
+  });
+
+</script>
+

@@ -6,6 +6,10 @@ import Layout from "../layouts/Layout.astro";
 import Services from "../components/Services.astro";
 // import {FAQ} from '../components/FAQs';
 import Showcase from "../components/Showcase.astro";
+import "../styles/globals.css";
+import ProductShowcase from "../components/blocks/ProductShowcase.astro";
+
+
 
 
 
@@ -15,9 +19,11 @@ import Showcase from "../components/Showcase.astro";
 
   <Container>
     <Hero />
+    <ProductShowcase />
     <Showcase/>
     <Services />
     <Cta />
+
     <!-- <FAQ client:load/> -->
  
   </Container>
