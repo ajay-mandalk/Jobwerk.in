@@ -112,6 +112,14 @@ export default {
     				to: {
     					'background-position': '0% 0%'
     				}
+    			},
+    			pulse: {
+    				'0%, 100%': {
+    					boxShadow: '0 0 0 0 var(--pulse-color)'
+    				},
+    				'50%': {
+    					boxShadow: '0 0 0 8px var(--pulse-color)'
+    				}
     			}
     		},
     		animation: {
@@ -120,7 +128,8 @@ export default {
     			meteor: 'meteor 5s linear infinite',
     			'shiny-text': 'shiny-text 8s infinite',
     			rainbow: 'rainbow var(--speed, 2s) infinite linear',
-    			shine: 'shine var(--duration) infinite linear'
+    			shine: 'shine var(--duration) infinite linear',
+    			pulse: 'pulse var(--duration) ease-out infinite'
     		}
     	}
     },

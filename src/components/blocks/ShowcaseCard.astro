@@ -1,0 +1,140 @@
+---
+import { MagicCard } from "@/components/ui/magic-card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+interface Props {
+  title: string;
+  description: string;
+  imageUrl: string;
+  features: string[];
+  specifications?: {
+    cavities?: number;
+    material?: string;
+    cycleTime?: string;
+    dimensions?: string;
+  };
+  status?: 'Trending' | 'On Demand' | 'Design Phase' | 'In Production' | 'Testing' | 'Maintenance' | 'Quality Control';
+}
+
+const { title, description, imageUrl, features, specifications, status = 'In Production' } = Astro.props;
+
+const statusStyles = {
+  Trending: {
+    bg: "bg-amber-100 text-amber-800",
+    glow: "bg-amber-800",
+  },
+  "On Demand": {
+    bg: "bg-gray-100 text-gray-800",
+    glow: "bg-gray-800",
+  },
+  "Design Phase": {
+    bg: "bg-orange-100 text-orange-800",
+    glow: "bg-orange-800",
+  },
+  "In Production": {
+    bg: "bg-green-100 text-green-800",
+    glow: "bg-green-800",
+  },
+  Testing: {
+    bg: "bg-blue-100 text-blue-800",
+    glow: "bg-blue-800",
+  },
+  Maintenance: {
+    bg: "bg-red-100 text-red-800",
+    glow: "bg-red-800",
+  },
+  "Quality Control": {
+    bg: "bg-neutral-100 text-neutral-800",
+    glow: "bg-neutral-800",
+  },
+} as const;
+---
+
+<MagicCard
+  className="relative overflow-hidden p-6 transition-all duration-300"
+  gradientColor={"#D9D9D955"}
+  client:load
+>
+  <div class="space-y-6">
+    <!-- Status Badge -->
+    <div class="flex justify-between items-center">
+      <Badge variant="outline" className={`${statusStyles[status].bg} border-none`}>
+        <span class="flex items-center gap-1.5">
+          {status}
+          <span class="flex size-2">
+            <span class={`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ${statusStyles[status].glow}`}/>
+            <span class={`relative inline-flex rounded-full h-2 w-2 ${statusStyles[status].glow}`}/>
+          </span>
+        </span>
+      </Badge>
+    </div>
+
+    <!-- Image Container -->
+    <div class="relative overflow-hidden rounded-lg bg-gradient-to-b from-gray-900/5 to-gray-900/20 dark:from-gray-50/5 dark:to-gray-50/20">
+      <img 
+        src={imageUrl} 
+        alt={title} 
+        class="w-full h-56 object-cover transition-all duration-300 hover:scale-105"
+      />
+    </div>
+
+    <!-- Content -->
+    <div class="space-y-4">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{title}</h3>
+      <p class="text-gray-600 dark:text-gray-300">{description}</p>
+      
+      <!-- Specifications Grid -->
+      {specifications && (
+        <div class="grid grid-cols-2 gap-4 mt-4">
+          {specifications.cavities && (
+            <div class="space-y-1">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Cavities</p>
+              <p class="font-medium">{specifications.cavities}</p>
+            </div>
+          )}
+          {specifications.material && (
+            <div class="space-y-1">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Material</p>
+              <p class="font-medium">{specifications.material}</p>
+            </div>
+          )}
+          {specifications.cycleTime && (
+            <div class="space-y-1">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Cycle Time</p>
+              <p class="font-medium">{specifications.cycleTime}</p>
+            </div>
+          )}
+          {specifications.dimensions && (
+            <div class="space-y-1">
+              <p class="text-sm text-gray-500 dark:text-gray-400">Dimensions</p>
+              <p class="font-medium">{specifications.dimensions}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      <!-- Features List -->
+      <ul class="space-y-2">
+        {features.map(feature => (
+          <li class="flex items-center text-gray-600 dark:text-gray-300">
+            <svg class="w-5 h-5 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <!-- Actions -->
+      <div class="flex gap-4 pt-4">
+        <Button variant="default" className="flex-1">
+          Request Quote
+        </Button>
+        <Button variant="outline" className="flex-1">
+          View Details
+        </Button>
+      </div>
+    </div>
+  </div>
+</MagicCard>
