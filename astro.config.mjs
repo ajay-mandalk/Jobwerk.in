@@ -11,8 +11,8 @@ export default defineConfig({
       enabled: true,
     },
 
-    functionPerRoute: true, // This helps with route-specific bundling
-    maxDuration: 60
+
+    maxDuration: 60,
   }),
   integrations: [
     tailwind({
