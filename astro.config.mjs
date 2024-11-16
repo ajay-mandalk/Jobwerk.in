@@ -7,12 +7,12 @@ import icon from "astro-icon";
 export default defineConfig({
   output: 'server',
   adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-
-
-    maxDuration: 60,
+  output: 'server',
+  adapter: vercelServerless(),
+  webAnalytics: {
+    enabled: true,
+  },
+  maxDuration: 8,
   }),
   integrations: [
     tailwind({
