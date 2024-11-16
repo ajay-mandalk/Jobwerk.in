@@ -1,34 +1,16 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/serverless';
-import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-import icon from "astro-icon";
+import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
+  integrations: [react(), tailwind()],
   output: 'server',
   adapter: vercel({
+    analytics: true,
+    imageService: true,
     webAnalytics: {
       enabled: true,
     },
-
-
-    maxDuration: 60,
   }),
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    react(),
-    icon()
-  ],
-  // Simplified Vite config
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: undefined
-        }
-      }
-    }
-  }
 });

@@ -1,8 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/entry" }
-  ],
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "framework": "astro"
+  "cleanUrls": true,
+  "framework": "astro",
+  "buildCommand": "npm run build"
 }
