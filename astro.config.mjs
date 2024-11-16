@@ -7,10 +7,18 @@ export default defineConfig({
   integrations: [react(), tailwind()],
   output: 'server',
   adapter: vercel({
-    analytics: true,
-    imageService: true,
     webAnalytics: {
       enabled: true,
+    },
+    speedInsights: {
+      enabled: true,
+    },
+    imageService: true,
+    devMode: false,
+    functionPerRoute: false,
+    edgeMiddleware: false,
+    imageConfig: {
+      domains: [],
     },
   }),
 });

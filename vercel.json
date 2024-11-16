@@ -1,5 +1,7 @@
 {
-  "cleanUrls": true,
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
   "framework": "astro",
-  "buildCommand": "npm run build"
+  "cleanUrls": true
 }

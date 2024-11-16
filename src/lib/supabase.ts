@@ -1,20 +1,13 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-// Remove any hardcoded values or process.env references
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL
-const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Add better error handling and debugging
-if (!supabaseUrl) {
-  console.error('Missing PUBLIC_SUPABASE_URL')
-  throw new Error('Missing PUBLIC_SUPABASE_URL')
+console.log('Supabase URL:', supabaseUrl);
+console.log('Supabase Key:', supabaseKey);
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing Supabase URL or Key');
 }
 
-if (!supabaseKey) {
-  console.error('Missing PUBLIC_SUPABASE_ANON_KEY')
-  throw new Error('Missing PUBLIC_SUPABASE_ANON_KEY')
-}
-
-console.log('Initializing Supabase with URL:', supabaseUrl) // Debug log
-
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(supabaseUrl, supabaseKey);
