@@ -1,7 +1,8 @@
 {
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/entry" }
+  ],
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
-  "installCommand": "npm install",
-  "framework": "astro",
-  "outputDirectory": "dist"
+  "framework": "astro"
 }

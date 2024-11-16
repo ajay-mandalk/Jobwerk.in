@@ -7,12 +7,12 @@ import icon from "astro-icon";
 export default defineConfig({
   output: 'server',
   adapter: vercel({
-  output: 'server',
-  adapter: vercelServerless(),
-  webAnalytics: {
-    enabled: true,
-  },
-  maxDuration: 8,
+    webAnalytics: {
+      enabled: true,
+    },
+
+
+    maxDuration: 60,
   }),
   integrations: [
     tailwind({
@@ -21,9 +21,9 @@ export default defineConfig({
     react(),
     icon()
   ],
+  // Simplified Vite config
   vite: {
     build: {
-      assetsInlineLimit: 0,
       rollupOptions: {
         output: {
           manualChunks: undefined
