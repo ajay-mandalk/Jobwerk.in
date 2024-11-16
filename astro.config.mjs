@@ -10,9 +10,8 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-
-
-    maxDuration: 60,
+    edgeMiddleware: true, // Add this
+    includeFiles: ['**/*.{js,json}'], // Add this to ensure all files are included
   }),
   integrations: [
     tailwind({
@@ -21,9 +20,9 @@ export default defineConfig({
     react(),
     icon()
   ],
+  // Simplified Vite config
   vite: {
     build: {
-      assetsInlineLimit: 0,
       rollupOptions: {
         output: {
           manualChunks: undefined
