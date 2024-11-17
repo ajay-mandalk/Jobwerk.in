@@ -1,6 +1,5 @@
 ---
-import Link from "../components/ui/Link.astro";
-
+// Popup CTA Content
 const ctaContent = {
   isActive: true,
   title: "Get Best Quote with Jobwerk™",
@@ -14,8 +13,8 @@ const ctaContent = {
 {ctaContent.isActive && (
   <div
     id="ctaPopup"
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-    <div class="max-w-4xl w-full mx-4">
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50  items-center justify-center p-2 sm:p-4 md:p-8 overflow-y-auto hidden">
+    <div class="w-full max-w-lg mx-auto sm:max-w-2xl lg:max-w-4xl">
       <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-700 via-blue-700 to-blue-700">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-10">
@@ -30,8 +29,8 @@ const ctaContent = {
         </div>
 
         <!-- Content Container -->
-        <div class="relative px-6 py-12 md:px-12 md:py-16">
-          <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+        <div class="relative px-4 py-8 sm:px-6 sm:py-12 md:px-12 md:py-16">
+          <div class="flex flex-col items-center text-center">
             <!-- Badge -->
             <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-white text-blue-900">
               {ctaContent.badge}
@@ -42,24 +41,24 @@ const ctaContent = {
             </span>
 
             <!-- Title -->
-            <h2 class="mt-4 text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+            <h2 class="mt-4 text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight">
               {ctaContent.title}
             </h2>
 
             <!-- Description -->
-            <p class="mt-4 text-slate-200 text-lg md:text-xl">
+            <p class="mt-4 text-slate-200 text-sm sm:text-base md:text-lg max-w-prose">
               {ctaContent.description}
             </p>
 
             <!-- CTA Button -->
-            <div class="mt-8">
+            <div class="mt-6 sm:mt-8">
               <a
                 href={ctaContent.buttonLink}
-                class="inline-flex items-center gap-x-2 text-base font-semibold text-blue-900 bg-white hover:bg-blue-50 rounded-lg py-3 px-6 transition-colors duration-200"
+                class="inline-flex items-center gap-x-2 text-sm sm:text-base font-semibold text-blue-900 bg-white hover:bg-blue-50 rounded-lg py-2.5 px-4 sm:py-3 sm:px-6 transition-colors duration-200"
               >
                 {ctaContent.buttonText}
                 <svg
-                  class="size-5 animate-bounce-x"
+                  class="size-4 sm:size-5 animate-bounce-x"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -74,19 +73,19 @@ const ctaContent = {
                 </svg>
               </a>
             </div>
-          </div>
 
-          <!-- Close Button -->
-          <button
-            type="button"
-            id="closePopup"
-            class="absolute end-4 top-4 rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-200"
-          >
-            <span class="sr-only">Close</span>
-            <svg class="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+            <!-- Close Button -->
+            <button
+              type="button"
+              id="closePopup"
+              class="absolute end-2 top-2 sm:end-4 sm:top-4 rounded-full p-1.5 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-200"
+            >
+              <span class="sr-only">Close</span>
+              <svg class="size-4 sm:size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -108,26 +107,53 @@ const ctaContent = {
 </style>
 
 <script>
+  // Show popup after 3 seconds and handle display state in localStorage
+  const POPUP_SHOWN_KEY = 'popup_shown_date';
+  const POPUP_DELAY = 3000; // 3 seconds
 
-  // Show popup after 3 seconds
-  setTimeout(() => {
+  function shouldShowPopup() {
+    const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
+    if (!lastShown) return true;
+
+    const lastShownDate = new Date(lastShown);
+    const now = new Date();
+    const daysSinceLastShown = (now.getTime() - lastShownDate.getTime()) / (1000 * 3600 * 24);
+    
+    return daysSinceLastShown >= 1; // Show once per day
+  }
+
+  if (shouldShowPopup()) {
+    setTimeout(() => {
+      const popup = document.getElementById('ctaPopup');
+      if (popup) {
+        popup.classList.remove('hidden');
+        localStorage.setItem(POPUP_SHOWN_KEY, new Date().toISOString());
+      }
+    }, POPUP_DELAY);
+  }
+
+  // Close popup function
+  function closePopup() {
     const popup = document.getElementById('ctaPopup');
-    if (popup) popup.classList.remove('hidden');
-  }, 3000);
+    if (popup) {
+      popup.classList.add('hidden');
+    }
+  }
 
   // Close popup when clicking the close button
-  document.getElementById('closePopup')?.addEventListener('click', () => {
-    const popup = document.getElementById('ctaPopup');
-    if (popup) popup.classList.add('hidden');
-  });
+  document.getElementById('closePopup')?.addEventListener('click', closePopup);
 
   // Close popup when clicking outside
-  document.getElementById('ctaPopup')?.addEventListener('click', (e: MouseEvent) => {
-    if ((e.target as HTMLElement).id === 'ctaPopup') {
-      const popup = document.getElementById('ctaPopup');
-      if (popup) popup.classList.add('hidden');
+  document.getElementById('ctaPopup')?.addEventListener('click', (e) => {
+    if ((e as MouseEvent).target instanceof Element && (e.target as Element).id === 'ctaPopup') {
+      closePopup();
     }
   });
 
+  // Close popup when pressing Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closePopup();
+    }
+  });
 </script>
-
