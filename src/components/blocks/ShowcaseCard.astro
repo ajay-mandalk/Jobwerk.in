@@ -17,7 +17,7 @@ interface Props {
   status?: 'Trending' | 'On Demand' | 'Design Phase' | 'In Production' | 'Testing' | 'Maintenance' | 'Quality Control';
 }
 
-const { title, description, imageUrl, features, specifications, status = 'In Production' } = Astro.props;
+const { title, description, imageUrl, features, specifications, status } = Astro.props;
 
 const statusStyles = {
   Trending: {
@@ -59,12 +59,12 @@ const statusStyles = {
   <div class="space-y-6">
     <!-- Status Badge -->
     <div class="flex justify-between items-center">
-      <Badge variant="outline" className={`${statusStyles[status].bg} border-none`}>
+      <Badge variant="outline" className={`${statusStyles[status || 'In Production'].bg} border-none`}>
         <span class="flex items-center gap-1.5">
-          {status}
+          {status || 'In Production'}
           <span class="flex size-2">
-            <span class={`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ${statusStyles[status].glow}`}/>
-            <span class={`relative inline-flex rounded-full h-2 w-2 ${statusStyles[status].glow}`}/>
+            <span class={`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ${statusStyles[status || 'In Production'].glow}`}/>
+            <span class={`relative inline-flex rounded-full h-2 w-2 ${statusStyles[status || 'In Production'].glow}`}/>
           </span>
         </span>
       </Badge>

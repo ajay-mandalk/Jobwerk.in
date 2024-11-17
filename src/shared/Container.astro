@@ -1,16 +1,9 @@
 ---
-const { class: className, fluid } = Astro.props;
+const { class: className = "", fluid = false } = Astro.props;
 ---
 
 <div
-  class:list={[
-    // Base styles
-    "w-full mx-auto px-4 md:px-6 lg:px-8",
-    // Conditional max-width based on fluid prop
-    !fluid ? "max-w-7xl" : "",
-    // Custom classes
-    className
-  ]}
+  class={`w-full mx-auto px-4 md:px-6 lg:px-8 ${!fluid ? "max-w-7xl" : ""} ${className}`}
 >
   <slot />
 </div>

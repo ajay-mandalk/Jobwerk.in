@@ -1,9 +1,13 @@
+// src/components/Auth/Login.tsx
 import React, { useState } from 'react';
-import { useAuth } from './AuthProvider';
 import { supabase } from '../../lib/supabase';
+import { useAuth } from './AuthProvider';
 
-const Login = () => {
-  const { user, loading, signOut } = useAuth();
+const Login: React.FC = () => {
+  const auth = useAuth();
+  const user = auth?.user;
+  const loading = auth?.loading;
+  const signOut = auth?.signOut;
   const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handleLogin = async (e: React.FormEvent) => {

@@ -5,6 +5,7 @@ import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   integrations: [react(), tailwind()],
+  site: "https://www.jobwerk.in",
   output: 'server',
   adapter: vercel({
     webAnalytics: {
