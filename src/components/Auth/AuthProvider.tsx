@@ -1,3 +1,4 @@
+// src/components/Auth/AuthProvider.tsx
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import { supabase } from '../../lib/supabase';
 import type { User } from '@supabase/supabase-js';
@@ -48,10 +49,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signOut, loading }}>
+    <AuthContext.Provider value={{ user, loading, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 }
-// src/components/Auth/AuthProvider.tsx
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
 export { default as Login } from './Login';
