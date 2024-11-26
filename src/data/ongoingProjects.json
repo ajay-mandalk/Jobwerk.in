@@ -1,0 +1,44 @@
+[
+    {
+      "id": 1,
+      "name": "Automotive Dashboard Panel Mold",
+      "status": "Trending",
+      "Qty": 150,
+      "rate": 2500
+    },
+    {
+      "id": 2,
+      "name": "Medical Device Housing",
+      "status": "Design Phase",
+      "Qty": 80,
+      "rate": 1800
+    },
+    {
+      "id": 3,
+      "name": "Consumer Electronics Enclosure",
+      "status": "In Production",
+      "Qty": 200,
+      "rate": 3000
+    },
+    {
+      "id": 4,
+      "name": "Industrial Pump Components",
+      "status": "Testing",
+      "Qty": 120,
+      "rate": 2200
+    },
+    {
+      "id": 5,
+      "name": "Packaging Solutions",
+      "status": "On Demand",
+      "Qty": 100,
+      "rate": 2000
+    },
+    {
+      "id": 6,
+      "name": "Aerospace Component Mold",
+      "status": "Quality Control",
+      "Qty": 50,
+      "rate": 3500
+    }
+  ]

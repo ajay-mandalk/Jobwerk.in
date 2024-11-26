@@ -1,0 +1,131 @@
+---
+import Marquee from "@/components/ui/marquee";
+type StatusType = keyof typeof statusStyles;
+
+
+
+const statusStyles = {
+  "Trending": {
+    bg: "bg-amber-100 text-amber-800",
+    glow: "bg-amber-800",
+  },
+  "On Demand": {
+    bg: "bg-lime-100 text-gray-800",
+    glow: "bg-gray-800",
+  },
+  "Design Phase": {
+    bg: "bg-orange-100 text-orange-800",
+    glow: "bg-orange-800",
+  },
+  "In Production": {
+    bg: "bg-green-100 text-green-800",
+    glow: "bg-green-800",
+  },
+  "Testing": {
+    bg: "bg-blue-100 text-blue-800",
+    glow: "bg-blue-800",
+  },
+  "Maintenance": {
+    bg: "bg-red-100 text-red-800",
+    glow: "bg-red-800",
+  },
+  "Jobwork": {
+    bg: "bg-neutral-100 text-neutral-800",
+    glow: "bg-neutral-800",
+  },
+} as const;
+
+// You can later fetch this from your Supabase database
+const ongoingProjects: Array<{
+  id: number;
+  name: string;
+  status: StatusType;
+  Qty?: number;
+  rate?: number;
+}> = [
+
+    {
+    "id": 1,
+    "name": "Plastic Die Mould, For Construction, Grade: H13",
+    "status": "Trending",
+    "Qty": 150,
+    "rate": 2500
+  },
+  {
+    "id": 2,
+    "name": "Molding Hot Rolled Plastic Injection houseold Moulding Die",
+    "status": "Design Phase",
+  
+  },
+  {
+    "id": 3,
+    "name": "Plastic Die And Mould, For Injection Moulding",
+    "status": "In Production",
+    "Qty": 200,
+ 
+  },
+  {
+    "id": 4,
+    "name": "Cast Iron Plastic Dustbin Moulding Die, Packaging Type: Box",
+    "status": "Testing",
+
+  },
+  {
+    "id": 5,
+    "name": "Plastic Moulding Dies, Packaging Type: Box",
+    "status": "On Demand",
+    "Qty": 100,
+
+  },
+  {
+    "id": 6,
+    "name": "Plastic Bottle Mould Die, Packaging Type: Box",
+    "status": "Jobwork",
+    "Qty": 5000,
+    "rate": 3500
+  }
+];
+---
+
+<section class="relative bg-gray-100 dark:bg-gray-900">
+  <div class="flex w-full lg:w-auto items-center justify-between">
+    <Marquee className="[--duration:20s]" pauseOnHover={true} client:load>
+      {
+        ongoingProjects.map((project): any => (
+          <div
+            class="relative w-60 mx-2 overflow-hidden rounded-lg border p-2 cursor-pointer
+                      border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]
+                      dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+          >
+            <div class="flex flex-col gap-1">
+              <span
+                class={`inline-flex items-center gap-1 py-1 px-2 rounded-full text-xs font-medium ${statusStyles[project.status].bg}`}
+              >
+                {project.status}
+                <span class="flex size-2">
+                  <span
+                    class={`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ${statusStyles[project.status].glow}`}
+                  />
+                  <span
+                    class={`relative inline-flex rounded-full h-2 w-2 ${statusStyles[project.status].glow}`}
+                  />
+                </span>
+              </span>
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
+                {project.name}
+              </h3>
+              <div class="flex space-x-4">
+              <p class="text-xs text-gray-600 dark:text-gray-300">
+                Qty: {project.Qty !== undefined ? project.Qty : "N/A"}
+              </p>
+              <p class="text-xs text-gray-600 dark:text-gray-300">
+                Rate: ₹{project.rate !== undefined ? project.rate : "N/A"}
+              </p>
+            </div>
+            </div>
+          </div>
+        ))
+      }
+    </Marquee>
+  </div>
+</section>
