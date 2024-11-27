@@ -4,5 +4,10 @@
   "installCommand": "npm install",
   "framework": "astro",
   "cleanUrls": true,
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "functions": {
+    "_functions/**/*.js": {
+      "runtime": "nodejs@20.x"
+    }
+  }
 }

@@ -1,12 +1,5 @@
-/**
- * INJECTION MOLDING INDUSTRY WEB APPLICATION
- * ----------------------------------------
- * @project InjectionMoldingPortal
- * @description Enterprise web application for injection molding industry
- * @author [Your Name]
- * @version 1.0.0
- * 
- * TECH STACK CONFIGURATION
+
+
  * -----------------------
  * Frontend: Astro + React
  * Styling: Tailwind CSS + shadcn/ui
@@ -56,6 +49,7 @@
  * 
  * COMPONENT STRUCTURE
  * -----------------
+/**
  * layouts/
  *   - MainLayout.astro
  *   - DashboardLayout.astro
