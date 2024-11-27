@@ -135,22 +135,21 @@ const firstRow = currentProjects.slice(0, currentProjects.length / 2);
 const secondRow = currentProjects.slice(currentProjects.length / 2);
 ---
 
-<section class="relative py-12">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl lg:text-5xl xl:text-6xl text-center font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-gray-600">Featured Mold Projects</h2>
+<section class="relative py-2">
+  <div class="container mx-auto px-4 mb-2">
+    <h3 class=" text-3xl lg:text-4xl xl:text-5xl sm:text-3xl text-center font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-gray-600">Ongoing </h3>
 
     <!-- First Marquee -->
     <Marquee className="[--duration:12s]" pauseOnHover={true} client:load>
       {
         firstRow.map((project) => (
-          <div
-            class="relative w-80 mx-4 overflow-hidden rounded-xl border p-6 cursor-pointer
+        <div
+            class="relative w-80 mx-2 overflow-hidden rounded-xl border p-6 cursor-pointer
                       border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]
                       dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
           >
             <div class="flex flex-col gap-3">
-              {/* // Update the status indicator in your markup */}
-              <span
+                <span
                 class={`inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium ${statusStyles[project.status].bg}`}
               >
                 {project.status}
@@ -185,7 +184,7 @@ const secondRow = currentProjects.slice(currentProjects.length / 2);
       {
         secondRow.map((project) => (
           <div
-            class="relative w-80 mx-4 overflow-hidden rounded-xl border p-6 cursor-pointer
+            class="relative w-80 mx-2 overflow-hidden rounded-xl border p-6 cursor-pointer
                       border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]
                       dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
           >

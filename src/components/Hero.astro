@@ -7,11 +7,11 @@ import Container from "../shared/Container.astro";
 
 <main class="relative w-full bg-gradient-to-b from-slate-900 to-slate-800">
   <!-- Background Meteors -->
-  <Meteors client:load number={20} />
+  <Meteors client:load number={30} />
   
-  <Container fluid={true} class="flex flex-col items-center relative z-10 py-8 md:py-16">
+  <Container fluid={true} class="flex w-full lg:w-auto  justify-between flex-col items-center relative z-10 py-8 md:py-16">
     <div class="text-center max-w-3xl mx-auto">
-      <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+      <h1 class="text-5xl lg:text-6xl xl:text-6xl font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
         Multiply Your Molds </br> Divide The Cost
       </h1>
       
@@ -32,7 +32,7 @@ import Container from "../shared/Container.astro";
 
         <Link
           size="lg"
-          href="/UserQuery"
+          href="/#"
           class="flex-1 relative group overflow-hidden rounded-lg border border-white/20 hover:border-white/40 transition-all duration-300 px-8 py-3"
           target="_blank"
           rel="noopener">

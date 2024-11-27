@@ -3,30 +3,21 @@ import { MagicCard } from "@/components/ui/magic-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-interface Props {
+interface ShowcaseCardProps {
+  id: number;
   title: string;
   description: string;
   imageUrl: string;
-  features: string[];
-  specifications?: {
-    cavities?: number;
-    material?: string;
-    cycleTime?: string;
-    dimensions?: string;
-  };
-  status?: 'Trending' | 'On Demand' | 'Design Phase' | 'In Production' | 'Testing' | 'Maintenance' | 'Quality Control';
+  status: "In Production" | "Testing" | "Maintenance" | "Quality Control" | "On Demand" | "Jobwork" | "Design Phase"; // Add all possible statuses
+  Qty?: number;
+  rate?: number;
 }
+const { id, title, description, imageUrl, status, Qty, rate } = Astro.props as ShowcaseCardProps;
 
-const { title, description, imageUrl, features, specifications, status } = Astro.props;
-
-const statusStyles = {
-  Trending: {
-    bg: "bg-amber-100 text-amber-800",
-    glow: "bg-amber-800",
-  },
+const statusStyles: Record<ShowcaseCardProps['status'], { bg: string; glow: string }> = {
   "On Demand": {
-    bg: "bg-gray-100 text-gray-800",
-    glow: "bg-gray-800",
+    bg: "bg-lime-100 text-lime-800",
+    glow: "bg-lime-800",
   },
   "Design Phase": {
     bg: "bg-orange-100 text-orange-800",
@@ -36,105 +27,57 @@ const statusStyles = {
     bg: "bg-green-100 text-green-800",
     glow: "bg-green-800",
   },
-  Testing: {
+  "Testing": {
     bg: "bg-blue-100 text-blue-800",
     glow: "bg-blue-800",
   },
-  Maintenance: {
+  "Maintenance": {
     bg: "bg-red-100 text-red-800",
     glow: "bg-red-800",
   },
-  "Quality Control": {
+  "Jobwork": {
     bg: "bg-neutral-100 text-neutral-800",
     glow: "bg-neutral-800",
+  },
+  "Quality Control": {
+    bg: "bg-purple-100 text-purple-800",
+    glow: "bg-purple-800",
   },
 } as const;
 ---
 
 <MagicCard
-  className="relative overflow-hidden p-6 transition-all duration-300"
-  gradientColor={"#D9D9D955"}
-  client:load
+  imageUrl={imageUrl}
+  className="relative p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
 >
-  <div class="space-y-6">
-    <!-- Status Badge -->
-    <div class="flex justify-between items-center">
-      <Badge variant="outline" className={`${statusStyles[status || 'In Production'].bg} border-none`}>
-        <span class="flex items-center gap-1.5">
-          {status || 'In Production'}
-          <span class="flex size-2">
-            <span class={`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ${statusStyles[status || 'In Production'].glow}`}/>
-            <span class={`relative inline-flex rounded-full h-2 w-2 ${statusStyles[status || 'In Production'].glow}`}/>
-          </span>
-        </span>
-      </Badge>
+  <!-- Project Title -->
+  <h3 class="text-sm font-semibold text-gray-900 mb-2">{title}</h3>
+
+  <!-- Project Description -->
+  <p class="text-xs text-gray-600 mb-4">{description}</p>
+
+  <!-- Qty, Rate, and Order Now Button Aligned Horizontally -->
+  <div class="mt-auto flex items-center justify-between">
+    <div class="flex space-x-4">
+      <p class="text-xs text-gray-600">
+        <strong>Qty:</strong>
+        {Qty !== undefined ? Qty : "N/A"}
+      </p>
+      <p class="text-xs text-gray-600">
+        <strong>Rate:</strong> ₹{rate !== undefined ? rate : "N/A"}
+      </p>
     </div>
-
-    <!-- Image Container -->
-    <div class="relative overflow-hidden rounded-lg bg-gradient-to-b from-gray-900/5 to-gray-900/20 dark:from-gray-50/5 dark:to-gray-50/20">
-      <img 
-        src={imageUrl} 
-        alt={title} 
-        class="w-full h-56 object-cover transition-all duration-300 hover:scale-105"
-      />
-    </div>
-
-    <!-- Content -->
-    <div class="space-y-4">
-      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{title}</h3>
-      <p class="text-gray-600 dark:text-gray-300">{description}</p>
-      
-      <!-- Specifications Grid -->
-      {specifications && (
-        <div class="grid grid-cols-2 gap-4 mt-4">
-          {specifications.cavities && (
-            <div class="space-y-1">
-              <p class="text-sm text-gray-500 dark:text-gray-400">Cavities</p>
-              <p class="font-medium">{specifications.cavities}</p>
-            </div>
-          )}
-          {specifications.material && (
-            <div class="space-y-1">
-              <p class="text-sm text-gray-500 dark:text-gray-400">Material</p>
-              <p class="font-medium">{specifications.material}</p>
-            </div>
-          )}
-          {specifications.cycleTime && (
-            <div class="space-y-1">
-              <p class="text-sm text-gray-500 dark:text-gray-400">Cycle Time</p>
-              <p class="font-medium">{specifications.cycleTime}</p>
-            </div>
-          )}
-          {specifications.dimensions && (
-            <div class="space-y-1">
-              <p class="text-sm text-gray-500 dark:text-gray-400">Dimensions</p>
-              <p class="font-medium">{specifications.dimensions}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      <!-- Features List -->
-      <ul class="space-y-2">
-        {features.map(feature => (
-          <li class="flex items-center text-gray-600 dark:text-gray-300">
-            <svg class="w-5 h-5 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-
-      <!-- Actions -->
-      <div class="flex gap-4 pt-4">
-        <Button variant="default" className="flex-1">
-          Request Quote
-        </Button>
-        <Button variant="outline" className="flex-1">
-          View Details
-        </Button>
-      </div>
-    </div>
+    <Button variant="outline" size="sm" className="mt-2">Get Quote Now</Button>
+  </div>
+  <!-- Status Badge Positioned at Lower Left -->
+  <Badge className={`inline-flex items-center gap-1 px-2 py-1 rounded-full ${statusStyles[status].bg}`}>
+    {status}
+    <span class={`inline-block w-2 h-2 rounded-full ${statusStyles[status].glow} animate-ping`}></span>
+  </Badge>
+  <!-- View Details Link Positioned at Lower Right -->
+  <div class="flex justify-end">
+    <a href={`/projects/${id}`} class="text-blue-500 hover:underline text-xs"
+      >View Details</a
+    >
   </div>
 </MagicCard>

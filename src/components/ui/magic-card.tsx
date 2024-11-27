@@ -6,6 +6,7 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface MagicCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  imageUrl: string;
   gradientSize?: number;
   gradientColor?: string;
   gradientOpacity?: number;
@@ -14,6 +15,7 @@ export interface MagicCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function MagicCard({
   children,
   className,
+  imageUrl,
   gradientSize = 200,
   gradientColor = "#262626",
   gradientOpacity = 0.8,
@@ -49,6 +51,13 @@ export function MagicCard({
         className,
       )}
     >
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt="Project Image"
+          className="w-full h-40 object-cover rounded-t-lg"
+        />
+      )}
       <div className="relative z-10">{children}</div>
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"

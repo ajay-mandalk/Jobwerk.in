@@ -10,8 +10,8 @@ const statusStyles = {
     glow: "bg-amber-800",
   },
   "On Demand": {
-    bg: "bg-lime-100 text-gray-800",
-    glow: "bg-gray-800",
+    bg: "bg-lime-100 text-lime-800",
+    glow: "bg-lime-800",
   },
   "Design Phase": {
     bg: "bg-orange-100 text-orange-800",
@@ -93,21 +93,21 @@ const ongoingProjects: Array<{
       {
         ongoingProjects.map((project): any => (
           <div
-            class="relative w-60 mx-2 overflow-hidden rounded-lg border p-2 cursor-pointer
+            class="relative w-60 mx-0 overflow-hidden rounded-lg border p-1 cursor-pointer
                       border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]
                       dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
           >
             <div class="flex flex-col gap-1">
               <span
-                class={`inline-flex items-center gap-1 py-1 px-2 rounded-full text-xs font-medium ${statusStyles[project.status].bg}`}
+                class={`inline-flex items-center gap-1 py-0.5 px-1 rounded-full text-xs font-medium ${statusStyles[project.status].bg}`}
               >
                 {project.status}
                 <span class="flex size-2">
                   <span
-                    class={`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ${statusStyles[project.status].glow}`}
+                    class={`animate-ping absolute inline-flex h-1 w-1 rounded-full opacity-75 ${statusStyles[project.status].glow}`}
                   />
                   <span
-                    class={`relative inline-flex rounded-full h-2 w-2 ${statusStyles[project.status].glow}`}
+                    class={`relative inline-flex rounded-full h-1 w-1 ${statusStyles[project.status].glow}`}
                   />
                 </span>
               </span>
