@@ -1,12 +1,13 @@
 ---
 // Popup CTA Content
 const ctaContent = {
+ 
   isActive: true,
   title: "Get Best Quote with Jobwerk™",
   badge: "Limited Time",
   description: "Streamline your procurement process and secure competitive quotes for your injection molding needs",
   buttonText: "Quote & Source Parts",
-  buttonLink: "/BookOrder"
+  buttonLink: "/DiscoverJobwerk"
 };
 ---
 
@@ -118,7 +119,7 @@ const ctaContent = {
     const lastShownDate = new Date(lastShown);
     const now = new Date();
     const daysSinceLastShown = (now.getTime() - lastShownDate.getTime()) / (1000 * 3600 * 24);
-    
+   
     return daysSinceLastShown >= 1; // Show once per day
   }
 

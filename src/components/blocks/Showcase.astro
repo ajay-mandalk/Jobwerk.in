@@ -6,7 +6,7 @@ interface DiscoverProject {
   title: string;
   description: string;
   imageUrl: string;
-  status: "In Production" | "Testing" | "Maintenance" | "Quality Control" | "On Demand" | "Jobwork";
+  status: "Co-Own Mold" | "Jobwerk" | "For Rent" |  "High Demand" |  "Design Phase"; // Add all possible statuses
   Qty: number;
   rate: number;
 }
@@ -17,7 +17,7 @@ const DiscoverProject: DiscoverProject[] = [
     title: "Mold Die For Cosmetic Bottle",
     description: "air less pump bottle cosmetic face serum bottle with unique screw cap skincare cosmetic plastic bottles",
     imageUrl: "https://s.alicdn.com/@sc04/kf/H8b48a65680774f15a2ddbe6758e0886cT.jpg_720x720q50.jpg",
-    status: "In Production",
+    status: "Co-Own Mold",
     Qty: 100,
     rate: 5000,
   },
@@ -26,7 +26,7 @@ const DiscoverProject: DiscoverProject[] = [
     title: "learn to walk infantil toys kids children gift toys kids' tricycles bike children toddler tricycle",
     description: "Ideal for thermoset materials and large structural parts.",
     imageUrl: "https://s.alicdn.com/@sc04/kf/H0123c4ad19b8426c86a345d7146c59aaz.jpg_720x720q50.jpg",
-    status: "Testing",
+    status: "Jobwerk",
     Qty: 200,
     rate: 6000,
   },
@@ -35,7 +35,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Injection Mold Die",
   description: "Perfect for high-volume plastic parts production with complex geometries.",
   imageUrl: "/images/mold1.jpg",
-  status: "In Production",
+  status: "For Rent",
   Qty: 100,
   rate: 5000,
 },
@@ -44,7 +44,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Compression Mold Die",
   description: "Ideal for thermoset materials and large structural parts.",
   imageUrl: "http://5.imimg.com/data5/ANDROID/Default/2023/10/354248496/XC/BM/IE/1999910/product-jpeg-125x125.jpg",
-  status: "Testing",
+  status: "High Demand",
   Qty: 200,
   rate: 6000,
 },
@@ -53,7 +53,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Rotational Mold Die",
   description: "Designed for producing hollow plastic products with uniform thickness.",
   imageUrl: "https://5.imimg.com/data5/GS/JW/MY-2035221/injection-moulded-plastic-part-250x250.jpg",
-  status: "Maintenance",
+  status: "Design Phase",
   Qty: 150,
   rate: 5500,
 },
@@ -62,7 +62,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Transfer Mold Die",
   description: "Efficient for multi-cavity mold applications, enhancing production speed.",
   imageUrl: "https://5.imimg.com/data5/ANDROID/Default/2023/10/354248888/IL/RU/XL/1999910/product-jpeg-250x250.jpg",
-  status: "Quality Control",
+  status: "Co-Own Mold",
   Qty: 120,
   rate: 5800,
 },
@@ -71,7 +71,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Electric Mold Die",
   description: "Utilizes electric heating for precise temperature control and energy efficiency.",
   imageUrl: "https://5.imimg.com/data5/SELLER/Default/2022/2/LI/JU/YP/2770564/plastic-nylon-bushes-250x250.jpg",
-  status: "On Demand",
+  status: "Jobwerk",
   Qty: 80,
   rate: 6200,
 },
@@ -80,7 +80,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Hydraulic Mold Die",
   description: "Offers robust performance for heavy-duty injection molding tasks.",
   imageUrl: "https://s.alicdn.com/@sc04/kf/H99810193335b463e89f4256023ed7f56Z.jpg_720x720q50.jpg",
-  status: "Jobwork",
+  status: "For Rent",
   Qty: 300,
   rate: 7500,
 },
@@ -89,7 +89,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Side Action Mold Die",
   description: "Enables the creation of intricate side features without compromising quality.",
   imageUrl: "https://5.imimg.com/data5/CB/ML/MY-2/injection-moulded-components-250x250.jpg",
-  status: "In Production",
+  status: "High Demand",
   Qty: 90,
   rate: 5300,
 },
@@ -98,7 +98,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Two-Plate Mold Die",
   description: "Simplifies the molding process with a straightforward two-plate system.",
   imageUrl: "https://5.imimg.com/data5/SELLER/Default/2022/2/SN/OW/ZP/49249773/plastic-bangle-stand-250x250.jpg",
-  status: "Testing",
+  status: "High Demand",
   Qty: 180,
   rate: 6100,
 },
@@ -107,7 +107,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Mold Die - Plastic Bottle",
   description: "Food Grade Custom Net Red Beverage Plastic Bottle Milk Plastic Bottle PET350ml",
   imageUrl: "https://s.alicdn.com/@sc04/kf/H98144700cefd43b3a05bfa1b33509d5a1.jpg_720x720q50.jpg",
-  status: "Maintenance",
+  status: "Design Phase",
   Qty: 160,
   rate: 5900,
 },
@@ -116,7 +116,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Hot Runner Mold Die",
   description: "Reduces waste and cycle times with a heated runner system.",
   imageUrl: "https://5.imimg.com/data5/YS/TM/MY-3595321/small-size-injection-molded-parts-250x250.jpg",
-  status: "Quality Control",
+  status: "Co-Own Mold",
   Qty: 130,
   rate: 6400,
 },
@@ -125,7 +125,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Cold Runner Mold Die",
   description: "Cost-effective solution for producing high-quality parts with a traditional runner system.",
   imageUrl: "https://s.alicdn.com/@sc04/kf/HTB1d9C2JXXXXXccXFXXq6xXFXXXR.jpg_720x720q50.jpg",
-  status: "On Demand",
+  status: "Jobwerk",
   Qty: 110,
   rate: 5200,
 },
@@ -134,7 +134,7 @@ const DiscoverProject: DiscoverProject[] = [
   title: "Bahama Mold Die",
   description: "Specialized for complex designs, ensuring precision and durability in each production cycle.",
   imageUrl: "https://s.alicdn.com/@sc04/kf/HTB1XxOIJXXXXXcsXFXXq6xXFXXXq.jpg_720x720q50.jpg",
-  status: "Jobwork",
+  status: "High Demand",
   Qty: 250,
   rate: 7000,
 },
@@ -143,7 +143,7 @@ const DiscoverProject: DiscoverProject[] = [
 <section id="showcase" class="py-4 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="mb-14 text-3xl lg:text-4xl xl:text-5xl text-center font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-gray-600">
-     Discover Projects
+     Discover Jobwork
     </h2>
     <div class="grid md:grid-cols-3 gap-8">
       {DiscoverProject.map((die: DiscoverProject) => (

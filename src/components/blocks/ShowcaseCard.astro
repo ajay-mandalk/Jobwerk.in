@@ -8,42 +8,34 @@ interface ShowcaseCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  status: "In Production" | "Testing" | "Maintenance" | "Quality Control" | "On Demand" | "Jobwork" | "Design Phase"; // Add all possible statuses
+  status: "Co-Own Mold" | "Jobwerk" | "For Rent" |  "High Demand" |  "Design Phase"; // Add all possible statuses
   Qty?: number;
   rate?: number;
 }
 const { id, title, description, imageUrl, status, Qty, rate } = Astro.props as ShowcaseCardProps;
 
 const statusStyles: Record<ShowcaseCardProps['status'], { bg: string; glow: string }> = {
-  "On Demand": {
+  "Co-Own Mold": {
     bg: "bg-lime-100 text-lime-800",
     glow: "bg-lime-800",
   },
-  "Design Phase": {
-    bg: "bg-orange-100 text-orange-800",
-    glow: "bg-orange-800",
-  },
-  "In Production": {
+  "Jobwerk": {
     bg: "bg-green-100 text-green-800",
     glow: "bg-green-800",
   },
-  "Testing": {
+  "For Rent": {
     bg: "bg-blue-100 text-blue-800",
     glow: "bg-blue-800",
   },
-  "Maintenance": {
+  "High Demand": {
     bg: "bg-red-100 text-red-800",
     glow: "bg-red-800",
   },
-  "Jobwork": {
-    bg: "bg-neutral-100 text-neutral-800",
-    glow: "bg-neutral-800",
+  "Design Phase": {
+    bg: "bg-yellow-100 text-yellow-800",
+    glow: "bg-yellow-800",
   },
-  "Quality Control": {
-    bg: "bg-purple-100 text-purple-800",
-    glow: "bg-purple-800",
-  },
-} as const;
+};
 ---
 
 <MagicCard
@@ -67,7 +59,7 @@ const statusStyles: Record<ShowcaseCardProps['status'], { bg: string; glow: stri
         <strong>Rate:</strong> ₹{rate !== undefined ? rate : "N/A"}
       </p>
     </div>
-    <Button variant="outline" size="sm" className="mt-2">Get Quote Now</Button>
+    <Button variant="outline" size="sm" className="mt-2">Get Jobwork</Button>
   </div>
   <!-- Status Badge Positioned at Lower Left -->
   <Badge className={`inline-flex items-center gap-1 px-2 py-1 rounded-full ${statusStyles[status].bg}`}>

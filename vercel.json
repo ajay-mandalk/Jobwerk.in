@@ -3,10 +3,11 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "astro",
+  
   "cleanUrls": true,
   "outputDirectory": "dist",
   "functions": {
-    "_functions/**/*.js": {
+    "api/**/*.js": {
       "runtime": "nodejs@20.x"
     }
   }
