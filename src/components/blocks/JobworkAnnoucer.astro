@@ -1,45 +1,17 @@
 ---
 import Marquee from "@/components/ui/marquee";
-type StatusType = keyof typeof statusStyles;
+import { statusStyles, type Status } from '@/script/statusStyles';
 
 
 
-const statusStyles = {
-  "Trending": {
-    bg: "bg-amber-100 text-amber-800",
-    glow: "bg-amber-800",
-  },
-  "On Demand": {
-    bg: "bg-lime-100 text-lime-800",
-    glow: "bg-lime-800",
-  },
-  "Design Phase": {
-    bg: "bg-orange-100 text-orange-800",
-    glow: "bg-orange-800",
-  },
-  "In Production": {
-    bg: "bg-green-100 text-green-800",
-    glow: "bg-green-800",
-  },
-  "Testing": {
-    bg: "bg-blue-100 text-blue-800",
-    glow: "bg-blue-800",
-  },
-  "Maintenance": {
-    bg: "bg-red-100 text-red-800",
-    glow: "bg-red-800",
-  },
-  "Jobwork": {
-    bg: "bg-neutral-100 text-neutral-800",
-    glow: "bg-neutral-800",
-  },
-} as const;
+
+
 
 // You can later fetch this from your Supabase database
 const ongoingProjects: Array<{
   id: number;
   name: string;
-  status: StatusType;
+  status: Status;
   Qty?: number;
   rate?: number;
 }> = [
@@ -47,7 +19,7 @@ const ongoingProjects: Array<{
     {
     "id": 1,
     "name": "Plastic Die Mould, For Construction, Grade: H13",
-    "status": "Trending",
+    "status": "Jobwerk",
     "Qty": 150,
     "rate": 2500
   },
@@ -60,27 +32,27 @@ const ongoingProjects: Array<{
   {
     "id": 3,
     "name": "Plastic Die And Mould, For Injection Moulding",
-    "status": "In Production",
+    "status": "High Demand",
     "Qty": 200,
  
   },
   {
     "id": 4,
     "name": "Cast Iron Plastic Dustbin Moulding Die, Packaging Type: Box",
-    "status": "Testing",
+    "status": "Co-Own Mold",
 
   },
   {
     "id": 5,
     "name": "Plastic Moulding Dies, Packaging Type: Box",
-    "status": "On Demand",
+    "status": "Jobwerk",
     "Qty": 100,
 
   },
   {
     "id": 6,
     "name": "Plastic Bottle Mould Die, Packaging Type: Box",
-    "status": "Jobwork",
+    "status": "For Rent",
     "Qty": 5000,
     "rate": 3500
   }

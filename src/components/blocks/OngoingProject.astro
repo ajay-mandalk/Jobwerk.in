@@ -1,43 +1,15 @@
 ---
 import Marquee from "@/components/ui/marquee";
-type StatusType = keyof typeof statusStyles;
-const statusStyles = {
-  Trending: {
-    bg: "bg-amber-100 text-amber-800",
-    glow: "bg-amber-800",
-  },
-  "On Demand": {
-    bg: "bg-gray-100 text-gray-800",
-    glow: "bg-gray-800",
-  },
-  "Design Phase": {
-    bg: "bg-orange-100 text-orange-800",
-    glow: "bg-orange-800",
-  },
-  "In Production": {
-    bg: "bg-green-100 text-green-800",
-    glow: "bg-green-800",
-  },
-  Testing: {
-    bg: "bg-blue-100 text-blue-800",
-    glow: "bg-blue-800",
-  },
-  Maintenance: {
-    bg: "bg-red-100 text-red-800",
-    glow: "bg-red-800",
-  },
-  "Quality Control": {
-    bg: "bg-neutral-100 text-neutral-800",
-    glow: "bg-neutral-800",
-  },
-} as const;
+import { statusStyles, type Status } from '@/script/statusStyles';
+
+
 
 // You can later fetch this from your Supabase database
 const currentProjects: Array<{
   id: number;
   name: string;
   description: string;
-  status: StatusType;
+  status: Status;
   image: string;
   specifications?: {
     cavities?: number;
@@ -51,7 +23,7 @@ const currentProjects: Array<{
     name: "Automotive Dashboard Panel Mold",
     description:
       "High-precision injection mold for vehicle dashboard components with integrated air vent systems",
-    status: "Trending",
+    status: "Co-Own Mold",
     image: "/images/projects/dashboard-mold.jpg",
     specifications: {
       cavities: 2,
@@ -79,7 +51,7 @@ const currentProjects: Array<{
     name: "Consumer Electronics Enclosure",
     description:
       "Multi-cavity mold for smart home device housing with complex snap-fit features",
-    status: "In Production",
+    status: "High Demand",
     image: "/images/projects/electronics-case.jpg",
     specifications: {
       cavities: 8,
@@ -93,7 +65,7 @@ const currentProjects: Array<{
     name: "Industrial Pump Components",
     description:
       "Heavy-duty mold for chemical-resistant pump housings with precision water channels",
-    status: "Testing",
+    status: "Jobwerk",
     image: "/images/projects/pump-parts.jpg",
     specifications: {
       cavities: 1,
@@ -106,7 +78,7 @@ const currentProjects: Array<{
     id: 5,
     name: "Packaging Solutions",
     description: "High-speed thin-wall container mold with IML capability",
-    status: "On Demand",
+    status: "Design Phase",
     image: "/images/projects/packaging.jpg",
     specifications: {
       cavities: 16,
@@ -120,7 +92,7 @@ const currentProjects: Array<{
     name: "Aerospace Component Mold",
     description:
       "High-temperature mold for critical aerospace components with complex geometries",
-    status: "Quality Control",
+    status: "For Rent",
     image: "/images/projects/aerospace-part.jpg",
     specifications: {
       cavities: 1,

@@ -2,74 +2,100 @@
 import { MagicCard } from "@/components/ui/magic-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
+import { statusStyles, type Status } from '@/script/statusStyles';
 
 interface ShowcaseCardProps {
   id: number;
   title: string;
   description: string;
   imageUrl: string;
-  status: "Co-Own Mold" | "Jobwerk" | "For Rent" |  "High Demand" |  "Design Phase"; // Add all possible statuses
+  status: Status;
+
   Qty?: number;
   rate?: number;
+  isLoading?: boolean; // Add a loading state
 }
-const { id, title, description, imageUrl, status, Qty, rate } = Astro.props as ShowcaseCardProps;
+const { id, title, description, imageUrl, status, Qty, rate, isLoading } = Astro.props as ShowcaseCardProps;
 
-const statusStyles: Record<ShowcaseCardProps['status'], { bg: string; glow: string }> = {
-  "Co-Own Mold": {
-    bg: "bg-lime-100 text-lime-800",
-    glow: "bg-lime-800",
-  },
-  "Jobwerk": {
-    bg: "bg-green-100 text-green-800",
-    glow: "bg-green-800",
-  },
-  "For Rent": {
-    bg: "bg-blue-100 text-blue-800",
-    glow: "bg-blue-800",
-  },
-  "High Demand": {
-    bg: "bg-red-100 text-red-800",
-    glow: "bg-red-800",
-  },
-  "Design Phase": {
-    bg: "bg-yellow-100 text-yellow-800",
-    glow: "bg-yellow-800",
-  },
-};
 ---
 
 <MagicCard
   imageUrl={imageUrl}
   className="relative p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
 >
-  <!-- Project Title -->
-  <h3 class="text-sm font-semibold text-gray-900 mb-2">{title}</h3>
+  {isLoading ? (
+    <>
+      <!-- Skeleton for Image -->
+      <Skeleton className="w-full h-40 rounded-t-lg" />
 
-  <!-- Project Description -->
-  <p class="text-xs text-gray-600 mb-4">{description}</p>
+      <!-- Separator -->
+      <Skeleton className="my-4 h-1 w-full" />
 
-  <!-- Qty, Rate, and Order Now Button Aligned Horizontally -->
-  <div class="mt-auto flex items-center justify-between">
-    <div class="flex space-x-4">
-      <p class="text-xs text-gray-600">
-        <strong>Qty:</strong>
-        {Qty !== undefined ? Qty : "N/A"}
-      </p>
-      <p class="text-xs text-gray-600">
-        <strong>Rate:</strong> ₹{rate !== undefined ? rate : "N/A"}
-      </p>
-    </div>
-    <Button variant="outline" size="sm" className="mt-2">Get Jobwork</Button>
-  </div>
-  <!-- Status Badge Positioned at Lower Left -->
-  <Badge className={`inline-flex items-center gap-1 px-2 py-1 rounded-full ${statusStyles[status].bg}`}>
-    {status}
-    <span class={`inline-block w-2 h-2 rounded-full ${statusStyles[status].glow} animate-ping`}></span>
-  </Badge>
-  <!-- View Details Link Positioned at Lower Right -->
-  <div class="flex justify-end">
-    <a href={`/projects/${id}`} class="text-blue-500 hover:underline text-xs"
-      >View Details</a
-    >
-  </div>
+      <!-- Skeleton for Title -->
+      <Skeleton className="h-6 w-3/4 mb-2" />
+
+      <!-- Skeleton for Description -->
+      <Skeleton className="h-4 w-full mb-4" />
+      <Skeleton className="h-4 w-5/6 mb-4" />
+
+      <!-- Skeleton for Qty and Rate -->
+      <div class="mt-auto flex items-center justify-between">
+        <div class="flex space-x-4">
+          <Skeleton className="h-4 w-12" />
+          <Skeleton className="h-4 w-12" />
+        </div>
+        <Skeleton className="h-8 w-24" />
+      </div>
+
+      <!-- Skeleton for Badge -->
+      <Skeleton className="h-6 w-24 mt-4" />
+
+      <!-- Skeleton for View Details Link -->
+      <Skeleton className="h-4 w-24 mt-4" />
+    </>
+  ) : (
+    <>
+      {/* <!-- Image -->
+      <img src={imageUrl} alt={title} class="w-full h-40 object-cover rounded-t-lg" /> */}
+
+      <!-- Separator -->
+      <Separator className="my-4" />
+
+      <!-- Project Title -->
+      <h3 class="text-sm font-semibold text-gray-900 mb-2">{title}</h3>
+
+      <!-- Project Description -->
+      <p class="text-xs text-gray-600 mb-4">{description}</p>
+
+      <!-- Qty, Rate, and Order Now Button Aligned Horizontally -->
+      <div class="mt-auto flex items-center justify-between">
+        <div class="flex space-x-4">
+          <p class="text-xs text-gray-600">
+            <strong>Qty:</strong>
+            {Qty !== undefined ? Qty : "N/A"}
+          </p>
+          <p class="text-xs text-gray-600">
+            <strong>Rate:</strong> ₹{rate !== undefined ? rate : "N/A"}
+          </p>
+        </div>
+        <Button variant="outline" size="sm" className="mt-2 bg-blue-700 text-gray-200 py-1 px-2 text-xs bg-gradient-to-r from-purple-500/10 to-blue-700/10 ">Get Jobwork</Button>
+      </div>
+
+      <!-- Status Badge Positioned at Lower Left -->
+      <Badge className={`inline-flex items-center gap-1 px-2 py-1 rounded-full ${statusStyles[status].bg}`}>
+        {status}
+        <span class={`inline-block w-2 h-2 rounded-full ${statusStyles[status].glow} animate-ping`}></span>
+      </Badge>
+
+      <!-- View Details Link Positioned at Lower Right -->
+      <div class="flex justify-end">
+        <a href={`/projects/${id}`} class="text-blue-700 hover:underline text-xs bg-gradient-to-r from-purple-500/10 to-blue-500/10">
+          View Details
+        </a>
+      </div>
+
+    </>
+  )}
 </MagicCard>

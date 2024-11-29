@@ -1,7 +1,5 @@
 ---
-// Popup CTA Content
 const ctaContent = {
- 
   isActive: true,
   title: "Get Best Quote with Jobwerk™",
   badge: "Limited Time",
@@ -9,6 +7,37 @@ const ctaContent = {
   buttonText: "Quote & Source Parts",
   buttonLink: "/DiscoverJobwerk"
 };
+
+const POPUP_SHOWN_KEY = 'popup_shown_date';
+const POPUP_INTERVALS = [5, 60, 300, 86400]; // 3 seconds, 1 minute, 5 minutes, 1 day in seconds
+
+function getNextInterval() {
+  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
+  if (!lastShown) return POPUP_INTERVALS[0];
+
+  const lastShownDate = new Date(lastShown);
+  const now = new Date();
+  const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
+
+  for (const interval of POPUP_INTERVALS) {
+    if (secondsSinceLastShown < interval) {
+      return interval - secondsSinceLastShown;
+    }
+  }
+
+  return POPUP_INTERVALS[POPUP_INTERVALS.length - 1];
+}
+
+function shouldShowPopup() {
+  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
+  if (!lastShown) return true;
+
+  const lastShownDate = new Date(lastShown);
+  const now = new Date();
+  const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
+
+  return secondsSinceLastShown >= getNextInterval();
+}
 ---
 
 {ctaContent.isActive && (
@@ -108,9 +137,26 @@ const ctaContent = {
 </style>
 
 <script>
-  // Show popup after 3 seconds and handle display state in localStorage
+  // Show popup after the calculated delay and handle display state in localStorage
   const POPUP_SHOWN_KEY = 'popup_shown_date';
-  const POPUP_DELAY = 3000; // 3 seconds
+  const POPUP_INTERVALS = [3, 60, 300, 86400]; // 3 seconds, 1 minute, 5 minutes, 1 day in seconds
+
+  function getNextInterval() {
+    const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
+    if (!lastShown) return POPUP_INTERVALS[0];
+
+    const lastShownDate = new Date(lastShown);
+    const now = new Date();
+    const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
+
+    for (const interval of POPUP_INTERVALS) {
+      if (secondsSinceLastShown < interval) {
+        return interval - secondsSinceLastShown;
+      }
+    }
+
+    return POPUP_INTERVALS[POPUP_INTERVALS.length - 1];
+  }
 
   function shouldShowPopup() {
     const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
@@ -118,9 +164,9 @@ const ctaContent = {
 
     const lastShownDate = new Date(lastShown);
     const now = new Date();
-    const daysSinceLastShown = (now.getTime() - lastShownDate.getTime()) / (1000 * 3600 * 24);
-   
-    return daysSinceLastShown >= 1; // Show once per day
+    const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
+
+    return secondsSinceLastShown >= getNextInterval();
   }
 
   if (shouldShowPopup()) {
@@ -130,10 +176,9 @@ const ctaContent = {
         popup.classList.remove('hidden');
         localStorage.setItem(POPUP_SHOWN_KEY, new Date().toISOString());
       }
-    }, POPUP_DELAY);
+    }, getNextInterval() * 1000);
   }
 
-  // Close popup function
   function closePopup() {
     const popup = document.getElementById('ctaPopup');
     if (popup) {
