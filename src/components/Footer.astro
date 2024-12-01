@@ -90,19 +90,19 @@ const footerSections = {
       <div class="container mx-auto px-4 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <!-- Brand Column -->
-          <div class="lg:col-span-2 space-y-6">
-            <div class="flex items-center gap-2">
-              <div class="flex w-full lg:w-auto items-center justify-between">
-                <a href="/" class="flex items-center text-lg">
-                  <img src="/logo/jobwerk-dark.svg" alt="JobWerk Logo" class="hidden dark:block w-25 h-85 mr-2" />
-                  <img src="/logo/jobwerk-light.svg" alt="JobWerk Logo" class="block dark:hidden w-25 h-85 mr-2" />
-                </a>
-     
+          <div class="lg:col-span-2 space-y-4">
+            <div class="flex w-full lg:w-auto items-center justify-between">
+              <a href="/" class="flex items-center text-lg">
+                <img src="/logo/jobwerk-dark.svg" alt="JobWerk Logo" class="hidden dark:block w-25 h-85 mr-2" />
+                <img src="/logo/jobwerk-light.svg" alt="JobWerk Logo" class="block dark:hidden w-25 h-85 mr-2" />
+              </a>
             </div>
-            <p class="text-gray-600 dark:text-gray-300 max-w-sm">
-              Revolutionizing injection molding through innovative solutions and
-              reliable partnerships.
-            </p>
+            
+
+              <p class="text-gray-600 dark:text-gray-300 max-w-sm">
+                Revolutionizing injection molding through innovative solutions and
+                reliable partnerships.
+              </p>
             <div class="flex gap-4">
               {/* Social Links */}
               <a
@@ -195,6 +195,20 @@ const footerSections = {
       </div>
     </div>
     <!-- Bottom Bar -->
+         <!-- Wrap navigation columns with a relative div -->
+    <div class="relative">
+      <!-- Add GridPattern component -->
+      <GridPattern
+        client:load
+        class="absolute inset-0 h-full w-full text-gray-300 opacity-20 dark:text-gray-700"
+        squares={[
+          [1, 1],
+          [2, 3],
+          [3, 2],
+          [5, 5],
+          // ...additional squares...
+        ]}
+      />
     <div class="pt-8 border-t border-gray-200 dark:border-gray-800">
       <div
         class="flex flex-col md:flex-row justify-between items-center gap-4"

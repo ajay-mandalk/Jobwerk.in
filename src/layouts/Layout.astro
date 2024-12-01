@@ -10,7 +10,7 @@ interface Props {
 }
 
 const {
-  title = "ZJobwrk - Multiply Your Molds & Divide The Cost",
+  title = "Jobwrk - Multiply Your Molds & Divide The Cost",
   description = "We make it easy to get the materials, molds, and expertise you need to manufacture your products & Parts",
 } = Astro.props;
 ---
@@ -52,27 +52,16 @@ const {
 
     <!-- Include any additional scripts or styles here -->
   </head>
-  <body
-    class="flex w-full lg:w-auto flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-  >
-
-
-    <!-- Main Content -->
-    <main class="flex-grow">
-          <!-- Jobwork Announcer Ticker -->
+  <body>
+    <!-- Jobwork Announcer Ticker -->
     <JobworkAnnoucer />
     <PopupCta />
-    <!-- Navigation Bar -->
+
     <Navbar />
-      <slot />
-       <!-- Footer -->
+    <slot />
     <Footer />
-    </main>
 
-   
     <SpeedInsights />
-
-    <!-- Scripts placed at the end for better performance -->
-    <script type="module" src="/scripts/main.js"></script>
+   
   </body>
 </html>
