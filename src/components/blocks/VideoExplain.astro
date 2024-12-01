@@ -1,0 +1,60 @@
+---
+import HeroVideoDialog from '@/components/ui/hero-video-dialog';
+
+const videos = [
+  {
+    videoSrc: "https://www.youtube.com/embed/sBEzE4PCmqM?si=SHdv3MD6mRasO814",
+    thumbnailSrc: "/images/thumbnail/howMoldWork.jpg",
+    thumbnailAlt: "Hero Video Light",
+  },
+  {
+    videoSrc: "https://www.youtube.com/embed/sBEzE4PCmqM?si=SHdv3MD6mRasO814",
+    thumbnailSrc: "/images/thumbnail/howMoldWork.jpg",
+    thumbnailAlt: "Hero Video Light",
+  },
+  {
+    videoSrc: "https://www.youtube.com/embed/sBEzE4PCmqM?si=SHdv3MD6mRasO814",
+    thumbnailSrc: "/images/thumbnail/howMoldWork.jpg",
+    thumbnailAlt: "Hero Video Light",
+  },
+  {
+    videoSrc: "https://www.youtube.com/embed/sBEzE4PCmqM?si=SHdv3MD6mRasO814",
+    thumbnailSrc: "/images/thumbnail/howMoldWork.jpg",
+    thumbnailAlt: "Hero Video Light",
+  },
+
+];
+---
+
+<section class="relative py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-center mb-4">
+      <span class="text-center font-bold text-gray-500 text-2xl">How JobWerk Work</span>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {videos.map((video, _index) => (
+        <div class={`relative ${_index > 0 ? 'hidden lg:block' : 'block'}`}>
+          <HeroVideoDialog
+          client:load
+            className="dark:hidden block"
+            animationStyle="top-in-bottom-out"
+            videoSrc={video.videoSrc}
+            thumbnailSrc={video.thumbnailSrc}
+            thumbnailAlt={video.thumbnailAlt}
+          />
+          <HeroVideoDialog
+          client:load
+            className="hidden dark:block"
+            animationStyle="top-in-bottom-out"
+            videoSrc={video.videoSrc}
+            thumbnailSrc={video.thumbnailSrc}
+            thumbnailAlt={video.thumbnailAlt}
+          />
+        </div>
+      ))}
+    </div>
+    <div class="block lg:hidden mt-4">
+      <span class="text-right font-thin text-gray-100 text-sm">Source-PROTOLABS</span>
+    </div>
+  </div>
+</section>

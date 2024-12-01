@@ -55,19 +55,21 @@ const {
   <body
     class="flex w-full lg:w-auto flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
   >
-    <!-- Jobwork Announcer Ticker -->
+
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+          <!-- Jobwork Announcer Ticker -->
     <JobworkAnnoucer />
     <PopupCta />
     <!-- Navigation Bar -->
     <Navbar />
-
-    <!-- Main Content -->
-    <main class="flex-grow">
       <slot />
+       <!-- Footer -->
+    <Footer />
     </main>
 
-    <!-- Footer -->
-    <Footer />
+   
     <SpeedInsights />
 
     <!-- Scripts placed at the end for better performance -->

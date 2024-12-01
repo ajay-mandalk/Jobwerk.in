@@ -23,7 +23,7 @@ const { id, title, description, imageUrl, status, Qty, rate, isLoading } = Astro
 
 <MagicCard
   imageUrl={imageUrl}
-  className="relative p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+  className="relative p-4 bg-white dark:bg-gradient-to-b from-slate-900 to-slate-800 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
 >
   {isLoading ? (
     <>
@@ -61,22 +61,22 @@ const { id, title, description, imageUrl, status, Qty, rate, isLoading } = Astro
       <img src={imageUrl} alt={title} class="w-full h-40 object-cover rounded-t-lg" /> */}
 
       <!-- Separator -->
-      <Separator className="my-4" />
+      <Separator className="my-4 " />
 
       <!-- Project Title -->
-      <h3 class="text-sm font-semibold text-gray-900 mb-2">{title}</h3>
+      <h3 class="text-sm font-semibold text-gray-900 mb-2 dark:text-white">{title}</h3>
 
       <!-- Project Description -->
-      <p class="text-xs text-gray-600 mb-4">{description}</p>
+      <p class="text-xs text-gray-600 mb-4 dark:text-white">{description}</p>
 
       <!-- Qty, Rate, and Order Now Button Aligned Horizontally -->
-      <div class="mt-auto flex items-center justify-between">
+      <div class="mt-auto flex items-center justify-between dark:text-white">
         <div class="flex space-x-4">
-          <p class="text-xs text-gray-600">
+          <p class="text-xs text-gray-600 dark:text-white">
             <strong>Qty:</strong>
             {Qty !== undefined ? Qty : "N/A"}
           </p>
-          <p class="text-xs text-gray-600">
+          <p class="text-xs text-gray-600 dark:text-white">
             <strong>Rate:</strong> ₹{rate !== undefined ? rate : "N/A"}
           </p>
         </div>
@@ -91,7 +91,7 @@ const { id, title, description, imageUrl, status, Qty, rate, isLoading } = Astro
 
       <!-- View Details Link Positioned at Lower Right -->
       <div class="flex justify-end">
-        <a href={`/projects/${id}`} class="text-blue-700 hover:underline text-xs bg-gradient-to-r from-purple-500/10 to-blue-500/10">
+        <a href={`/projects/${id}`} class="text-blue-700 hover:underline text-xs dark:text-white">
           View Details
         </a>
       </div>

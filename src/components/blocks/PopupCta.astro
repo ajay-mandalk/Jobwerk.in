@@ -8,36 +8,6 @@ const ctaContent = {
   buttonLink: "/DiscoverJobwerk"
 };
 
-const POPUP_SHOWN_KEY = 'popup_shown_date';
-const POPUP_INTERVALS = [5, 60, 300, 86400]; // 3 seconds, 1 minute, 5 minutes, 1 day in seconds
-
-function getNextInterval() {
-  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
-  if (!lastShown) return POPUP_INTERVALS[0];
-
-  const lastShownDate = new Date(lastShown);
-  const now = new Date();
-  const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
-
-  for (const interval of POPUP_INTERVALS) {
-    if (secondsSinceLastShown < interval) {
-      return interval - secondsSinceLastShown;
-    }
-  }
-
-  return POPUP_INTERVALS[POPUP_INTERVALS.length - 1];
-}
-
-function shouldShowPopup() {
-  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
-  if (!lastShown) return true;
-
-  const lastShownDate = new Date(lastShown);
-  const now = new Date();
-  const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
-
-  return secondsSinceLastShown >= getNextInterval();
-}
 ---
 
 {ctaContent.isActive && (
@@ -45,7 +15,7 @@ function shouldShowPopup() {
     id="ctaPopup"
     class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50  items-center justify-center p-2 sm:p-4 md:p-8 overflow-y-auto hidden">
     <div class="w-full max-w-lg mx-auto sm:max-w-2xl lg:max-w-4xl">
-      <div class="relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-700 via-blue-700 to-blue-700">
+      <div class="relative overflow-hidden rounded-xl  bg-gradient-to-r from-blue-600 to-blue-700">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-10">
           <svg class="h-full w-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,69 +107,75 @@ function shouldShowPopup() {
 </style>
 
 <script>
-  // Show popup after the calculated delay and handle display state in localStorage
-  const POPUP_SHOWN_KEY = 'popup_shown_date';
-  const POPUP_INTERVALS = [3, 60, 300, 86400]; // 3 seconds, 1 minute, 5 minutes, 1 day in seconds
+   const POPUP_SHOWN_KEY = 'popup_shown_date';
+const POPUP_INTERVALS = [10, 20, 20, 10]; // 10 seconds, 20 seconds, 5 minutes, 1 day in seconds
 
-  function getNextInterval() {
-    const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
-    if (!lastShown) return POPUP_INTERVALS[0];
+function getNextDelay() {
+  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
+  if (!lastShown) return POPUP_INTERVALS[0] * 1000;
 
-    const lastShownDate = new Date(lastShown);
-    const now = new Date();
-    const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
+  const now = Date.now();
+  const lastShownTime = new Date(lastShown).getTime();
+  const elapsedSeconds = (now - lastShownTime) / 1000;
 
-    for (const interval of POPUP_INTERVALS) {
-      if (secondsSinceLastShown < interval) {
-        return interval - secondsSinceLastShown;
-      }
+  for (const interval of POPUP_INTERVALS) {
+    if (elapsedSeconds < interval) {
+      return (interval - elapsedSeconds) * 1000;
     }
-
-    return POPUP_INTERVALS[POPUP_INTERVALS.length - 1];
   }
 
-  function shouldShowPopup() {
-    const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
-    if (!lastShown) return true;
+  return POPUP_INTERVALS[POPUP_INTERVALS.length - 1] * 1000;
+}
 
-    const lastShownDate = new Date(lastShown);
-    const now = new Date();
-    const secondsSinceLastShown = (now.getTime() - lastShownDate.getTime()) / 1000;
+function shouldShowPopup() {
+  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
+  if (!lastShown) return true;
 
-    return secondsSinceLastShown >= getNextInterval();
-  }
+  const now = Date.now();
+  const lastShownTime = new Date(lastShown).getTime();
+  return (now - lastShownTime) / 1000 >= getNextDelay() / 1000;
+}
 
-  if (shouldShowPopup()) {
-    setTimeout(() => {
-      const popup = document.getElementById('ctaPopup');
-      if (popup) {
-        popup.classList.remove('hidden');
-        localStorage.setItem(POPUP_SHOWN_KEY, new Date().toISOString());
-      }
-    }, getNextInterval() * 1000);
-  }
+function initPopup() {
+  const popup = document.getElementById('ctaPopup');
+  const closeButton = document.getElementById('closePopup');
+
+  if (!popup || !closeButton) return;
 
   function closePopup() {
-    const popup = document.getElementById('ctaPopup');
     if (popup) {
       popup.classList.add('hidden');
     }
   }
 
-  // Close popup when clicking the close button
-  document.getElementById('closePopup')?.addEventListener('click', closePopup);
+  // Close on button click
+  closeButton.addEventListener('click', closePopup);
 
-  // Close popup when clicking outside
-  document.getElementById('ctaPopup')?.addEventListener('click', (e) => {
-    if ((e as MouseEvent).target instanceof Element && (e.target as Element).id === 'ctaPopup') {
+  // Close on outside click
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
       closePopup();
     }
   });
 
-  // Close popup when pressing Escape key
+  // Close on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closePopup();
     }
   });
+
+  // Show popup logic
+  if (shouldShowPopup()) {
+    setTimeout(() => {
+      popup.classList.remove('hidden');
+      localStorage.setItem(POPUP_SHOWN_KEY, new Date().toISOString());
+    }, getNextDelay());
+  }
+}
+
+// Initialize popup when DOM is ready
+document.addEventListener('DOMContentLoaded', initPopup);
 </script>
+
+

@@ -5,9 +5,6 @@ import Link from "../ui/Link.astro";
 import Dropdown from "./DropDown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
-
-
-
 const menuitems = [
   {
     title: "Services",
@@ -16,7 +13,6 @@ const menuitems = [
       { title: "Parts Outsourcing", path: "/" },
       { title: "Co-Own Mold", path: "#" },
       { title: "Injection Molding Jobwork", path: "#" }
-      
     ],
   },
   {
@@ -31,7 +27,6 @@ const menuitems = [
     title: "About Jobwerk",
     path: "/about",
   },
-
   {
     title: "Molding Consultation",
     badge: true,
@@ -41,60 +36,92 @@ const menuitems = [
 ---
 <Announcer />
 <Container>
- 
-  <header class="flex flex-col lg:flex-row justify-between items-center my-5">
-    
+  <header class="flex flex-col lg:flex-row justify-between items-center my-2">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"
-          ><span class="font-bold text-slate-800">JobWerk</span>
+        <a href="/" class="flex items-center text-lg">
+          <img src="/logo/jobwerk-dark.svg" alt="JobWerk Logo" class="hidden dark:block w-35 h-95 mr-2" />
+          <img src="/logo/jobwerk-light.svg" alt="JobWerk Logo" class="block dark:hidden w-35 h-95 mr-2" />
         </a>
-        <div class="block lg:hidden">
-          <MenuIcon class="w-6 h-6 text-gray-800" />
+        <div class="flex items-center gap-2 lg:hidden">
+          <button 
+            data-switch-theme 
+            class="theme-toggle-btn text-gray-800 dark:text-gray-200"
+            aria-label="Toggle theme"
+          >
+            <svg class="w-6 h-6 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <svg class="w-6 h-6 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+          <MenuIcon class="w-6 h-6 text-gray-800 dark:text-white" />
         </div>
       </div>
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-        <ul class="flex flex-col lg:flex-row lg:gap-3">
-          {
-            menuitems.map((item, index) => (
-              <>
-                {item.children && (
-                  <Dropdown
-                    title={item.title}
-                    children={item.children}
-                    lastItem={index === menuitems.length - 1}
-                  />
-                )}
-
-                {!item.children && (
-                  <li>
-                    <a
-                      href={item.path}
-                      class="flex lg:px-3 py-2 items-center text-gray-600 hover:text-gray-900">
-                      <span> {item.title}</span>
-                      {item.badge && (
-                        <span class="ml-1 px-2 py-0.5 text-[10px] animate-pulse font-semibold uppercase text-white bg-blue-600 rounded-full">
-                          Free
-                        </span>
-                      )}
-                    </a>
-                  </li>
-                )}
-              </>
-            ))
-          }
+      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 ">
+        <ul class="flex flex-col lg:flex-row lg:gap-3 dark:text-white">
+          {menuitems.map((item, index) => (
+            <li id={item.title}>
+              {item.children ? (
+                <Dropdown
+                  title={item.title}
+                  children={item.children}
+                  lastItem={index === menuitems.length - 1}
+                />
+              ) : (
+                <a
+                  href={item.path}
+                  class="flex lg:px-3 py-2 items-center dark:text-white text-gray-600 hover:text-gray-900"
+                >
+                  <span>{item.title}</span>
+                  {item.badge && (
+                    <span class="ml-1 px-2 py-0.5 text-[10px] animate-pulse font-semibold uppercase text-white bg-blue-600 rounded-full">
+                      Free
+                    </span>
+                  )}
+                </a>
+              )}
+            </li>
+          ))}
         </ul>
-        <div class="lg:hidden flex items-center mt-3 gap-4">
+        <div class="lg:hidden flex items-center mt-3 gap-4 dark:text-gray-500">
           <Link href="/UserQuery" style="muted" block size="md">Become a Partner</Link>
-          <Link href="/Login" size="md" block>Log In</Link>
+          <Link href="/Login" size="md" block>Get a Quote</Link>
         </div>
       </MenuItems>
-    </Astronav>
-    <div>
       <div class="hidden lg:flex items-center gap-4">
-        <a href="/UserQuery">Become a Partner</a>
         <Link href="/UserQuery" size="md">Get a Quote</Link>
+        <Link href="/UserQuery" size="md">Become a Partner</Link>
       </div>
-    </div>
+ 
+    </Astronav>
   </header>
 </Container>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeToggleBtn = document.querySelector('[data-switch-theme]');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else if (currentTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        if (prefersDarkScheme.matches) {
+          document.documentElement.classList.toggle('light');
+          var theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+        } else {
+          document.documentElement.classList.toggle('dark');
+          var theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        }
+        localStorage.setItem('theme', theme);
+      });
+    }
+  });
+</script>
