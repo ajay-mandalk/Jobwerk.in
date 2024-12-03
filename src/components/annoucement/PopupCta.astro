@@ -108,7 +108,7 @@ const ctaContent = {
 
 <script>
    const POPUP_SHOWN_KEY = 'popup_shown_date';
-const POPUP_INTERVALS = [10, 20, 20, 10]; // 10 seconds, 20 seconds, 5 minutes, 1 day in seconds
+const POPUP_INTERVALS = [10, 60, 310, 1440]; // 10 seconds, 60 seconds, 5 minutes, 1 day in seconds
 
 function getNextDelay() {
   const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
