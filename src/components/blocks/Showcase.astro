@@ -1,4 +1,9 @@
 ---
+function setVisibleCards(arg0: (prev: any) => any): unknown {
+throw new Error('Function not implemented.');
+}
+
+import { useState} from 'react';
 import ShowcaseCard from './ShowcaseCard.astro';
 
 interface DiscoverProject {
@@ -140,7 +145,73 @@ const DiscoverProject: DiscoverProject[] = [
 },
 ];
 ---
+
 <section id="showcase" class="relative py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-center mb-4">
+      <span class="text-center font-bold text-gray-500 text-2xl">Feature Projects</span>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8" id="cardsContainer">
+      {DiscoverProject.slice(0, 6).map((die: DiscoverProject) => (
+        <ShowcaseCard {...die} key={die.id} />
+      ))}
+    </div>
+    {DiscoverProject.length > 6 && (
+      <div class="flex justify-center mt-8">
+        <button
+          id="loadMore"
+          class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+        >
+          See More
+        </button>
+      </div>
+    )}
+  </div>
+</section>
+
+<script is:inline>
+  // Serialize the project data to make it available in client-side JS
+  const discoverProjects = JSON.parse(`${JSON.stringify(DiscoverProject)}`);
+  
+  let visibleCards = 6;
+  const container = document.getElementById('cardsContainer');
+  const loadMoreButton = document.getElementById('loadMore');
+
+  function loadMoreCards() {
+    // Get next batch of cards
+    const nextCards = discoverProjects.slice(visibleCards, visibleCards + 6);
+    
+    // Create HTML for new cards
+    const newCards = nextCards.map(die => `
+      <showcase-card 
+        id="${die.id}"
+        title="${die.title}"
+        description="${die.description}"
+        imageurl="${die.imageUrl}"
+        status="${die.status}"
+        qty="${die.Qty}"
+        rate="${die.rate}"
+      ></showcase-card>
+    `).join('');
+    
+    // Append new cards
+    container.insertAdjacentHTML('beforeend', newCards);
+    
+    // Update visible count
+    visibleCards += 6;
+    
+    // Hide button if no more cards
+    if (visibleCards >= discoverProjects.length) {
+      loadMoreButton.remove();
+    }
+  }
+
+  // Add event listener
+  loadMoreButton?.addEventListener('click', loadMoreCards);
+</script>
+
+
+<!-- <section id="showcase" class="relative py-8">
   <div class="container mx-auto px-4">
     <div class="flex justify-center mb-4">
       <span class="text-center font-bold text-gray-500 text-2xl">Feature Projects</span>
@@ -151,4 +222,4 @@ const DiscoverProject: DiscoverProject[] = [
       ))}
     </div>
   </div>
-</section>
+</section> -->

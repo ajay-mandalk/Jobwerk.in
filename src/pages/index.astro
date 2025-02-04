@@ -7,10 +7,12 @@ import Layout from "../layouts/Layout.astro";
 // import {FAQ} from '../components/FAQs';
 import Showcase from "../components/blocks/Showcase.astro";
 import "../styles/globals.css";
-import OngoingProject from "../components/blocks/OngoingProject.astro";
+
 import  SpeedInsights  from "@vercel/speed-insights/astro"
 import VideoExplain from "@/components/blocks/VideoExplain.astro";
 import Feature from "@/components/blocks/Feature.astro";
+import Promotion from "@/components/annoucement/Promotion.astro";
+import JobworkAnnoucer from "@/components/annoucement/JobworkAnnoucer.astro";
 
 
 
@@ -20,11 +22,14 @@ import Feature from "@/components/blocks/Feature.astro";
   <main class="flex flex-col gap-y-4 md:gap-y-8 overflow-hidden">
   
     <Hero />
-    <OngoingProject />
+    <!-- <OngoingProject /> -->
+             <!-- Jobwork Announcer Ticker -->
+             <JobworkAnnoucer />
     <Showcase />
     <Feature />
 
     <VideoExplain />
+    <Promotion/>
     
      <SpeedInsights />
 

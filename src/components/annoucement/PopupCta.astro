@@ -107,24 +107,13 @@ const ctaContent = {
 </style>
 
 <script>
-   const POPUP_SHOWN_KEY = 'popup_shown_date';
-const POPUP_INTERVALS = [10, 60, 310, 1440]; // 10 seconds, 60 seconds, 5 minutes, 1 day in seconds
+  const POPUP_SHOWN_KEY = 'popup_shown_date';
+const POPUP_CLOSE_COUNT_KEY = 'popup_close_count';
+const POPUP_INTERVALS = [0, 120, 1440]; // 0 seconds (immediately), 2 minutes (120 seconds), 24 hours (1440 minutes)
 
 function getNextDelay() {
-  const lastShown = localStorage.getItem(POPUP_SHOWN_KEY);
-  if (!lastShown) return POPUP_INTERVALS[0] * 1000;
-
-  const now = Date.now();
-  const lastShownTime = new Date(lastShown).getTime();
-  const elapsedSeconds = (now - lastShownTime) / 1000;
-
-  for (const interval of POPUP_INTERVALS) {
-    if (elapsedSeconds < interval) {
-      return (interval - elapsedSeconds) * 1000;
-    }
-  }
-
-  return POPUP_INTERVALS[POPUP_INTERVALS.length - 1] * 1000;
+  const closeCount = parseInt(localStorage.getItem(POPUP_CLOSE_COUNT_KEY) || '0', 10);
+  return POPUP_INTERVALS[closeCount] * 1000; // Convert to milliseconds
 }
 
 function shouldShowPopup() {
@@ -133,7 +122,12 @@ function shouldShowPopup() {
 
   const now = Date.now();
   const lastShownTime = new Date(lastShown).getTime();
-  return (now - lastShownTime) / 1000 >= getNextDelay() / 1000;
+  const elapsedSeconds = (now - lastShownTime) / 1000;
+
+  const closeCount = parseInt(localStorage.getItem(POPUP_CLOSE_COUNT_KEY) || '0', 10);
+  const nextInterval = POPUP_INTERVALS[closeCount] || POPUP_INTERVALS[POPUP_INTERVALS.length - 1];
+
+  return elapsedSeconds >= nextInterval;
 }
 
 function initPopup() {
@@ -145,6 +139,13 @@ function initPopup() {
   function closePopup() {
     if (popup) {
       popup.classList.add('hidden');
+
+      // Increment the close count
+      const closeCount = parseInt(localStorage.getItem(POPUP_CLOSE_COUNT_KEY) || '0', 10);
+      localStorage.setItem(POPUP_CLOSE_COUNT_KEY, (closeCount + 1).toString());
+
+      // Set the last shown time
+      localStorage.setItem(POPUP_SHOWN_KEY, new Date().toISOString());
     }
   }
 
