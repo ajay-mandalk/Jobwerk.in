@@ -1,0 +1,27 @@
+---
+import { getBlogPostBySlug } from "../../utils/getBlogPosts";
+
+const { slug } = Astro.params;
+const post = await getBlogPostBySlug(slug);
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+---
+
+<html>
+  <head>
+    <title>{post.attributes.title}</title>
+  </head>
+  <body>
+    <article>
+      <h1>{post.attributes.title}</h1>
+      <img
+        src={`http://localhost:1337${post.attributes.coverImage.data.attributes.url}`}
+        alt={post.attributes.title}
+        width="600"
+      />
+      <div>{post.attributes.content}</div>
+    </article>
+  </body>
+</html>

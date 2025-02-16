@@ -4,8 +4,9 @@ import Announcer from "@/components/annoucement/Announcer.astro";
 import Link from "../ui/Link.astro";
 import Dropdown from "./DropDown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import type { MenuItem } from "@/types/navbar";
 
-const menuitems = [
+const menuitems: MenuItem[] = [
   // {
   //   title: "Services",
   //   path: "/#",
@@ -32,6 +33,10 @@ const menuitems = [
     badge: true,
     path: "/UserQuery",
   },
+  {
+    title: "Blog",
+    path: "/blog",
+  }
 ];
 ---
 <Announcer />
@@ -86,18 +91,19 @@ const menuitems = [
           ))}
         </ul>
         <div class="lg:hidden flex items-center mt-3 gap-4 dark:text-gray-500">
-          <Link href="/UserQuery" style="muted" block size="md">Become a Partner</Link>
-          <Link href="/Login" size="md" block>Get a Quote</Link>
+          <Link href="/Form" style="muted" block size="md">Become a Partner</Link>
+          <Link href="/Form" size="md" block>Get a Quote</Link>
         </div>
       </MenuItems>
       <div class="hidden lg:flex items-center gap-4">
-        <Link href="/UserQuery" size="md">Get a Quote</Link>
+        <Link href="@/Form" size="md">Get a Quote</Link>
         <Link href="/UserQuery" size="md">Become a Partner</Link>
       </div>
  
     </Astronav>
   </header>
 </Container>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

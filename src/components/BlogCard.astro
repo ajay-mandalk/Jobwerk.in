@@ -1,0 +1,32 @@
+---
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './ui/card';
+import { Button } from './ui/button';
+import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
+import type { Post } from '../types/blogPost';
+
+const { post } = Astro.props;
+---
+<Card className="w-full max-w-md">
+  <CardHeader>
+    <CardTitle>{post.attributes.title}</CardTitle>
+    <CardDescription>{post.attributes.excerpt}</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <img
+      src={`http://localhost:1337${post.attributes.coverImage.data.attributes.url}`}
+      alt={post.attributes.title}
+      width="300"
+    />
+    <p>{post.attributes.content}</p>
+  </CardContent>
+  <CardFooter className="flex justify-between items-center">
+    <div class="flex items-center space-x-2">
+      <Avatar>
+        <AvatarImage src={post.attributes.author.avatar} alt={post.attributes.author.name} />
+        <AvatarFallback>{post.attributes.author.name[0]}</AvatarFallback>
+      </Avatar>
+      <span class="text-sm font-medium">{post.attributes.author.name}</span>
+    </div>
+    <Button variant="outline">Read More</Button>
+  </CardFooter>
+</Card>
