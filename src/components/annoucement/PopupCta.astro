@@ -15,12 +15,12 @@ const ctaContent = {
     id="ctaPopup"
     class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 items-center justify-center p-2 sm:p-4 md:p-8 overflow-y-auto hidden"
   >
-    <div class="w-full max-w-lg mx-auto sm:max-w-2xl lg:max-w-3xl bg-white rounded-xl shadow-md"> {/* Removed gradient, added shadow */}
+    <div class="w-full max-w-lg mx-auto sm:max-w-2xl lg:max-w-3xl bg-[#000000] rounded-xl shadow-md"> {/* Removed gradient, added shadow */}
       <div class="relative p-6"> {/* Added padding */}
         <button
           type="button"
           id="closePopup"
-          class="absolute top-4 right-4 rounded-full p-2 text-gray-600 hover:text-gray-800 focus:outline-none"
+          class="absolute top-4 right-4 rounded-full p-2 text-gray-300 hover:text-gray-400 focus:outline-none"
         >
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -32,17 +32,17 @@ const ctaContent = {
             {ctaContent.badge}
           </span>
 
-          <h2 class="mb-4 text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-800">
+          <h2 class="mb-4 text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-gray-100">
             {ctaContent.title}
           </h2>
 
-          <p class="mb-6 text-gray-600 text-base md:text-lg max-w-prose text-center">
+          <p class="mb-6 text-gray-100 text-base md:text-lg max-w-prose text-center">
             {ctaContent.description}
           </p>
 
           <a
             href={ctaContent.buttonLink}
-            class="inline-flex items-center justify-center gap-x-2 text-base font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg py-3 px-6 transition-colors duration-200"
+            class="inline-flex items-center justify-center gap-x-2 text-base font-semibold text-white hover:text-gray-950 bg-gray-600 hover:bg-gray-200 rounded-lg py-3 px-6 transition-colors duration-200"
           >
             {ctaContent.buttonText}
             <svg
@@ -78,7 +78,7 @@ const ctaContent = {
 <script>
   const POPUP_SHOWN_KEY = 'popup_shown_date';
 const POPUP_CLOSE_COUNT_KEY = 'popup_close_count';
-const POPUP_INTERVALS = [0, 30, 60]; // 0 seconds (immediately), 2 minutes (120 seconds), 24 hours (1440 minutes)
+const POPUP_INTERVALS = [5, 30, 60]; // 0 seconds (immediately), 2 minutes (120 seconds), 24 hours (1440 minutes)
 
 function getNextDelay() {
   const closeCount = parseInt(localStorage.getItem(POPUP_CLOSE_COUNT_KEY) || '0', 10);
