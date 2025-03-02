@@ -1,0 +1,72 @@
+---
+import { Toaster } from 'sonner';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalURL?: string;
+  keywords?: string;
+}
+
+const {
+  title = "Our Services - JobWerk™ | Injection Molding Solutions",
+  description = "Explore JobWerk's comprehensive injection molding services: fractional mold sharing, mold rental, outsourcing, and machine jobwerk. Reduce costs and increase efficiency.",
+  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  keywords = "injection molding, mold sharing, mold rental, manufacturing services, industrial automation"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={canonicalURL} />
+  <meta name="keywords" content={keywords} />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:image" content="/images/services-og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="/images/services-og.jpg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": ${title},
+      "description": ${description},
+      "url": ${Astro.url},
+      "provider": {
+        "@type": "Organization",
+        "name": "JobWerk™",
+        "url": "https://jobwerk.com"
+      }
+    }
+  </script>
+
+  <!-- Performance Optimizations -->
+  <link rel="preload" href="/styles/tailwind.css" as="style" />
+  <link rel="stylesheet" href="/styles/tailwind.css" />
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+  <Toaster position="top-center" richColors />
+  
+
+  
+  <main class="flex-1">
+    <slot />
+  </main>
+
+</body>
+</html> 

@@ -1,0 +1,9 @@
+---
+const { fallback = "Something went wrong. Please try again later." } = Astro.props;
+---
+
+<div role="alert" class="p-4 bg-red-50 text-red-900 rounded-lg">
+  <slot>
+    {fallback}
+  </slot>
+</div> 
