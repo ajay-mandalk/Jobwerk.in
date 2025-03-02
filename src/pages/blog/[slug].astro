@@ -1,27 +1,52 @@
 ---
-import { getBlogPostBySlug } from "../../utils/getBlogPosts";
+import Layout from '../../layouts/Layout.astro';
 
-const { slug } = Astro.params;
-const post = await getBlogPostBySlug(slug);
+export async function getStaticPaths() {
+  const posts = [
+    {
+      slug: 'injection-molding-trends-2024',
+      title: "Injection Molding Trends 2024",
+      content: "Full blog post content here...",
+      date: "2024-01-15",
+      image: "/images/blog1.jpg"
+    },
+    {
+      slug: 'material-selection-guide',
+      title: "Material Selection Guide",
+      content: "Full blog post content here...",
+      date: "2024-01-10",
+      image: "/images/blog2.jpg"
+    }
+  ];
 
-if (!post) {
-  return Astro.redirect("/404");
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
 }
+
+const { post } = Astro.props;
 ---
 
-<html>
-  <head>
-    <title>{post.attributes.title}</title>
-  </head>
-  <body>
-    <article>
-      <h1>{post.attributes.title}</h1>
-      <img
-        src={`http://localhost:1337${post.attributes.coverImage.data.attributes.url}`}
-        alt={post.attributes.title}
-        width="600"
-      />
-      <div>{post.attributes.content}</div>
-    </article>
-  </body>
-</html>
+<Layout title={`${post.title} | JobWerk Blog`}>
+  <article class="max-w-3xl mx-auto px-4 py-16">
+    <header class="mb-12">
+      <span class="text-sm text-gray-500 dark:text-gray-400">
+        {new Date(post.date).toLocaleDateString()}
+      </span>
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mt-2">
+        {post.title}
+      </h1>
+    </header>
+
+    <img 
+      src={post.image} 
+      alt={post.title} 
+      class="w-full h-96 object-cover mb-12 rounded-lg"
+    />
+
+    <div class="prose dark:prose-invert max-w-none">
+      {post.content}
+    </div>
+  </article>
+</Layout>

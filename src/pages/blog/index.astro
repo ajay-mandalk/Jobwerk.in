@@ -1,28 +1,45 @@
 ---
-import axios from 'axios';
-import BlogCard from '@/components/BlogCard.astro';
-import type { Post, StrapiResponse } from '@/types/blogPost';
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
 
-const apiUrl = 'http://localhost:1337/api/blog-posts?populate=*';
-let posts: Post[] = [];
-
-try {
-  const response = await axios.get<StrapiResponse>(apiUrl);
-  posts = response.data.data;
-} catch (error) {
-  console.error('Error fetching blog posts:', error);
-}
+// Fetch blog posts from your CMS or API
+const posts = [
+  {
+    id: 1,
+    title: "Injection Molding Trends 2024",
+    description: "Discover the latest trends in injection molding technology",
+    date: "2024-01-15",
+    image: "/images/mold1.jpg",
+    slug: "injection-molding-trends-2024"
+  },
+  {
+    id: 2,
+    title: "Material Selection Guide",
+    description: "How to choose the right material for your project",
+    date: "2024-01-10",
+    image: "/images/mold2.jpg",
+    slug: "material-selection-guide"
+  }
+];
 ---
-<section class="bg-white dark:bg-gray-900">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-    <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
-      <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Blog</h2>
-      <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">We use an agile approach to test assumptions and connect with the needs of your audience early and often.</p>
+
+<Layout title="Blog | JobWerk">
+  <section class="bg-white dark:bg-gray-900 py-16">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          JobWerk Blog
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          Insights and updates from the world of injection molding
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map(post => (
+          <BlogCard post={post} />
+        ))}
+      </div>
     </div>
-    <div class="grid gap-8 lg:grid-cols-2">
-      {posts.map((post) => (
-        <BlogCard post={post} />
-      ))}
-    </div>
-  </div>
-</section>
+  </section>
+</Layout>

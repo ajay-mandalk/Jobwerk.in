@@ -1,21 +1,38 @@
 ---
+import DOMPurify from 'dompurify';
+
+let sanitizedTitle = "this Project is Under Heavy Devlopment by Jobwerk™";
+let sanitizedBadge = "Coming Soon";
+let sanitizedDescription = "Streamline your procurement process and secure competitive quotes for your injection molding needs";
+let sanitizedButtonText = "Quote & Source Parts";
+let sanitizedButtonLink = "/DiscoverJobwerk";
+
+if (!import.meta.env.SSR) {
+  sanitizedTitle = DOMPurify.sanitize(sanitizedTitle);
+  sanitizedBadge = DOMPurify.sanitize(sanitizedBadge);
+  sanitizedDescription = DOMPurify.sanitize(sanitizedDescription);
+  sanitizedButtonText = DOMPurify.sanitize(sanitizedButtonText);
+  sanitizedButtonLink = DOMPurify.sanitize(sanitizedButtonLink);
+}
+
 const ctaContent = {
   isActive: true,
-  title: "Get Best Quote with Jobwerk™",
-  badge: "Limited Time",
-  description: "Streamline your procurement process and secure competitive quotes for your injection molding needs",
-  buttonText: "Quote & Source Parts",
-  buttonLink: "/DiscoverJobwerk"
+  title: sanitizedTitle,
+  badge: sanitizedBadge,
+  description: sanitizedDescription,
+  buttonText: sanitizedButtonText,
+  buttonLink: sanitizedButtonLink,
 };
-
 ---
+
+
 
 {ctaContent.isActive && (
   <div
     id="ctaPopup"
     class="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 items-center justify-center p-2 sm:p-4 md:p-8 overflow-y-auto hidden"
   >
-    <div class="w-full max-w-lg mx-auto sm:max-w-2xl lg:max-w-3xl bg-[#000000] rounded-xl shadow-md"> {/* Removed gradient, added shadow */}
+    <div class="w-full max-w-lg mx-auto sm:max-w-2xl lg:max-w-3xl bg-[#2e054e] rounded-xl shadow-md"> {/* Removed gradient, added shadow */}
       <div class="relative p-6"> {/* Added padding */}
         <button
           type="button"
@@ -78,7 +95,7 @@ const ctaContent = {
 <script>
   const POPUP_SHOWN_KEY = 'popup_shown_date';
 const POPUP_CLOSE_COUNT_KEY = 'popup_close_count';
-const POPUP_INTERVALS = [5, 30, 60]; // 0 seconds (immediately), 2 minutes (120 seconds), 24 hours (1440 minutes)
+const POPUP_INTERVALS = [5, 30, 60]; // 
 
 function getNextDelay() {
   const closeCount = parseInt(localStorage.getItem(POPUP_CLOSE_COUNT_KEY) || '0', 10);

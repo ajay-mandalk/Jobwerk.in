@@ -16,7 +16,7 @@ module.exports = ({ env }: { env: Env }): { settings: MiddlewareSettings } => ({
   settings: {
     cors: {
       enabled: true,
-      origin: ['http://localhost:3000'], // Replace with your frontend URL
+      origin: ['https://www.jobwerk.in'], // Replace with your frontend URL
     },
   },
 });

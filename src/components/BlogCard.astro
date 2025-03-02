@@ -1,32 +1,37 @@
 ---
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './ui/card';
-import { Button } from './ui/button';
-import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
-import type { Post } from '../types/blogPost';
+
+
+interface Props {
+  post: {
+    id: number;
+    title: string;
+    description: string;
+    date: string;
+    image: string;
+    slug: string;
+  };
+}
 
 const { post } = Astro.props;
 ---
-<Card className="w-full max-w-md">
-  <CardHeader>
-    <CardTitle>{post.attributes.title}</CardTitle>
-    <CardDescription>{post.attributes.excerpt}</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <img
-      src={`http://localhost:1337${post.attributes.coverImage.data.attributes.url}`}
-      alt={post.attributes.title}
-      width="300"
+
+<article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+  <a href={`/blog/${post.slug}`} class="block">
+    <img 
+      src={post.image} 
+      alt={post.title} 
+      class="w-full h-48 object-cover"
     />
-    <p>{post.attributes.content}</p>
-  </CardContent>
-  <CardFooter className="flex justify-between items-center">
-    <div class="flex items-center space-x-2">
-      <Avatar>
-        <AvatarImage src={post.attributes.author.avatar} alt={post.attributes.author.name} />
-        <AvatarFallback>{post.attributes.author.name[0]}</AvatarFallback>
-      </Avatar>
-      <span class="text-sm font-medium">{post.attributes.author.name}</span>
+    <div class="p-6">
+      <span class="text-sm text-gray-500 dark:text-gray-400">
+        {new Date(post.date).toLocaleDateString()}
+      </span>
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-2">
+        {post.title}
+      </h2>
+      <p class="mt-2 text-gray-600 dark:text-gray-300">
+        {post.description}
+      </p>
     </div>
-    <Button variant="outline">Read More</Button>
-  </CardFooter>
-</Card>
+  </a>
+</article>

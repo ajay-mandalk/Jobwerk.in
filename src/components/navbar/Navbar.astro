@@ -6,16 +6,8 @@ import Dropdown from "./DropDown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 import type { MenuItem } from "@/types/navbar";
 
+
 const menuitems: MenuItem[] = [
-  // {
-  //   title: "Services",
-  //   path: "/#",
-  //   children: [
-  //     { title: "Parts Outsourcing", path: "/" },
-  //     { title: "Co-Own Mold", path: "#" },
-  //     { title: "Injection Molding Jobwork", path: "#" }
-  //   ],
-  // },
   {
     title: "Home",
     path: "/",
@@ -39,6 +31,7 @@ const menuitems: MenuItem[] = [
   }
 ];
 ---
+
 <Announcer />
 <Container>
   <header class="flex flex-col lg:flex-row justify-between items-center my-2">
@@ -91,42 +84,52 @@ const menuitems: MenuItem[] = [
           ))}
         </ul>
         <div class="lg:hidden flex items-center mt-3 gap-4 dark:text-gray-500">
-          <Link href="/Form" style="muted" block size="md">Become a Partner</Link>
-          <Link href="/Form" size="md" block>Get a Quote</Link>
+          <Link href="/become-partner" style="muted" block size="md">Become a Partner</Link>
+          <Link href="/BecomePartnerForm" size="md" block>Get a Quote</Link>
         </div>
       </MenuItems>
       <div class="hidden lg:flex items-center gap-4">
-        <Link href="@/Form" size="md">Get a Quote</Link>
-        <Link href="/UserQuery" size="md">Become a Partner</Link>
+        <Link href="/BecomePartnerForm" size="md">Get a Quote</Link>
+        <Link href="/become-partner" size="md">Become a Partner</Link>
       </div>
- 
     </Astronav>
   </header>
 </Container>
 
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.querySelector('[data-switch-theme]');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const htmlElement = document.documentElement;
 
+    // Get the current theme from localStorage
     const currentTheme = localStorage.getItem('theme');
+
+    // Set the initial theme based on localStorage or system preference
     if (currentTheme === 'dark') {
-      document.documentElement.classList.add('dark');
+      htmlElement.classList.add('dark');
     } else if (currentTheme === 'light') {
-      document.documentElement.classList.remove('dark');
+      htmlElement.classList.remove('dark');
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      // Default to dark mode if system preference is dark
+      htmlElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      // Default to light mode
+      htmlElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
 
+    // Toggle theme on button click
     if (themeToggleBtn) {
       themeToggleBtn.addEventListener('click', () => {
-        if (prefersDarkScheme.matches) {
-          document.documentElement.classList.toggle('light');
-          var theme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+        const isDark = htmlElement.classList.contains('dark');
+        if (isDark) {
+          htmlElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
         } else {
-          document.documentElement.classList.toggle('dark');
-          var theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+          htmlElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
         }
-        localStorage.setItem('theme', theme);
       });
     }
   });

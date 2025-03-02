@@ -1,0 +1,51 @@
+---
+// Loading.astro
+---
+
+<div class="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-50">
+    <div class="jobwerk-text">
+      <span style="background: linear-gradient(90deg, #973BED, #007CFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Job</span>
+      <span style="background: linear-gradient(90deg, #FFC800, #F0F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Werk</span>
+    </div>
+  </div>
+  
+  <style>
+    .jobwerk-text {
+      font-size: 4rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      gap: 0.5rem;
+    }
+  
+    .jobwerk-text span {
+      animation: dashArray 2s ease-in-out infinite, dashOffset 2s linear infinite;
+    }
+  
+    @keyframes dashArray {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+  
+    @keyframes dashOffset {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+
+
+  </style>

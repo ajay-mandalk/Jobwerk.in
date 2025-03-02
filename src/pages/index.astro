@@ -1,28 +1,25 @@
 ---
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
-import Showcase from "../components/blocks/Showcase.astro";
 import "../styles/globals.css";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import VideoExplain from "@/components/blocks/VideoExplain.astro";
 import Feature from "@/components/blocks/Feature.astro";
 import Promotion from "@/components/annoucement/Promotion.astro";
 import JobworkAnnoucer from "@/components/annoucement/JobworkAnnoucer.astro";
+
+
+
 ---
 
-<Layout title="JobWerk - Multiply Your Molds | Divide The Cost">
-  <main class="flex flex-col gap-y-4 md:gap-y-8 overflow-hidden">
+<Layout title="JobWerk | Co-own Mold with Multiply Your Molds | Divide The Cost">
+ 
+  <main class="flex flex-col overflow-hidden">
     <Hero />
-    <!-- <OngoingProject /> -->
-    <!-- Jobwork Announcer Ticker -->
     <JobworkAnnoucer />
-
-    <Showcase />
     <Feature />
-
     <VideoExplain />
     <Promotion />
-
     <SpeedInsights />
   </main>
 </Layout>
