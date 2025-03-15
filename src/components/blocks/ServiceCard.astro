@@ -1,6 +1,6 @@
 ---
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import CtaButton from "@/components/ui/CtaButton.astro";
 import { MagicCard } from "@/components/ui/magic-card";
 
 interface Service {
@@ -12,7 +12,6 @@ interface Service {
   href: string;
   imageUrl: string;
   gradient: string;
-  ctaGradient: string;
   altText?: string;
 }
 
@@ -26,7 +25,6 @@ const services: Service[] = [
     href: "/services/fractional-sharing",
     imageUrl: "",
     gradient: "from-blue-600/20 to-purple-600/20",
-    ctaGradient: "from-blue-500/10 to-purple-500/10",
     altText: "Fractional Mold Die Sharing Service Illustration"
   },
   {
@@ -37,8 +35,7 @@ const services: Service[] = [
     cta: "View Options",
     href: "/services/rent-mold",
     imageUrl: "",
-    gradient: "from-emerald-600/20 to-teal-600/20",
-    ctaGradient: "from-emerald-500/10 to-teal-500/10"
+    gradient: "from-emerald-600/20 to-teal-600/20"
   },
   {
     id: 3,
@@ -48,8 +45,7 @@ const services: Service[] = [
     cta: "Get Quote",
     href: "/services/outsource",
     imageUrl: "",
-    gradient: "from-orange-600/20 to-red-600/20",
-    ctaGradient: "from-orange-500/10 to-red-500/10"
+    gradient: "from-orange-600/20 to-red-600/20"
   },
   {
     id: 4,
@@ -59,16 +55,12 @@ const services: Service[] = [
     cta: "Book Now",
     href: "/services/injection-machines",
     imageUrl: "",
-    gradient: "from-pink-600/20 to-rose-600/20",
-    ctaGradient: "from-pink-500/10 to-rose-500/10"
+    gradient: "from-pink-600/20 to-rose-600/20"
   }
 ];
 ---
 
-<section 
-  class="py-16 bg-gray-50 dark:bg-gray-900"
-  aria-label="Our Services"
->
+<section class="py-16 bg-gray-50 dark:bg-gray-900" aria-label="Our Services">
   <div class="container mx-auto px-4">
     <div class="text-center mb-12">
       <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-800 to-blue-300">
@@ -79,11 +71,7 @@ const services: Service[] = [
       </p>
     </div>
 
-    <div 
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-      role="list"
-      aria-label="Services list"
-    >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Services list">
       {services.map(service => (
         <MagicCard
           imageUrl={service.imageUrl}
@@ -105,20 +93,9 @@ const services: Service[] = [
               </p>
             </CardContent>
             <CardFooter className="mt-auto">
-              <Button
-                variant="outline"
-                className="w-full group relative overflow-hidden"
-                asChild
-              >
-                <a 
-                  href={service.href} 
-                  class="relative z-10"
-                  aria-label={`${service.cta} about ${service.title}`}
-                >
-                  <div class={`absolute inset-0 bg-gradient-to-r ${service.ctaGradient} opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+              <CtaButton href={service.href} ariaLabel={`${service.cta} about ${service.title}`}>
                   {service.cta}
-                </a>
-              </Button>
+              </CtaButton>
             </CardFooter>
           </Card>
         </MagicCard>

@@ -1,0 +1,17 @@
+---
+import Marquee from "@/components/ui/marquee";
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<section class="w-full bg-gradient-to-r from-blue-500 to-purple-500 p-2">
+  <Marquee className="[--duration:30s]" pauseOnHover={true}>
+    <span class="text-white text-sm font-medium">
+      {text}
+    </span>
+  </Marquee>
+</section>

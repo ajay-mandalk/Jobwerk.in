@@ -2,21 +2,57 @@
 import Link from "../components/ui/Link.astro";
 import { Meteors } from "./ui/meteors";
 import Container from "../shared/Container.astro";
-
 ---
 
-<main class="relative w-full bg-gradient-to-b from-slate-900 to-slate-800">
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Anton&family=Doto:wght@100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+  .hero-title {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <900>;
+    font-weight: 400;
+    color: rgb(191, 251, 79);
+    font-style: normal;
+    font-weight: bold;
+    font-display: swap;
+    font-size: 3rem;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .hero-description {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <50>;
+    font-weight: 200;
+    color: rgba(189, 252, 77, 0.988);
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    text-align: center;
+  }
+</style>
+
+<main class="relative w-full bg-gradient-to-b from-green-900 to-slate-800">
   <!-- Background Meteors with reduced number for better performance -->
-  <Meteors client:visible number={10} />
-  
-  <Container fluid={true} class="flex w-full lg:w-auto  justify-between flex-col items-center relative z-10 py-8 md:py-16">
+  <Meteors client:visible number={30} />
+
+  <Container
+    fluid={true}
+    class="flex w-full lg:w-auto justify-between flex-col items-center relative z-10 py-8 md:py-16"
+  >
     <div class="text-center max-w-3xl mx-auto">
-      <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
+      <h1
+        class="hero-title text-3xl lg:text-4xl xl:text-5xl font-bold lg:tracking-tight xl:tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300"
+      >
         Multiply Your Molds <br /> Divide The Cost
       </h1>
-      
-      <p class="text-base sm:text-lg mt-4 font-semibold text-gray-300/90 max-w-xl mx-auto leading-relaxed">
-        We make it easy to get the materials, molds, and expertise you need to manufacture your products & Parts
+
+      <p
+        class="hero-description text-base sm:text-lg mt-4 font-semibold text-gray-300/90 max-w-xl mx-auto leading-relaxed"
+      >
+        We make it easy to get the materials, molds, and expertise you need to
+        manufacture your products & Parts
       </p>
 
       <div class="mt-10 flex flex-wrap gap-4 justify-center">
@@ -26,20 +62,34 @@ import Container from "../shared/Container.astro";
           size="lg"
           class="w-full sm:w-auto flex-1 relative group overflow-hidden rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all duration-300 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3"
           rel="noopener"
-          aria-label="Take a survey about our services">
-          <span class="relative z-10 text-white font-medium text-sm sm:text-base md:text-lg">Take a Survey</span>
-          <div class="absolute inset-0 bg-gradient-to-r from-blue-500/40 to-purple-500/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+          aria-label="Take a survey about our services"
+        >
+          <span
+            class="relative z-10 text-white font-medium text-sm sm:text-base md:text-lg"
+            >Take a Survey</span
+          >
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-blue-500/40 to-purple-500/40 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+          </div>
         </Link>
-        
+
         <Link
           size="lg"
           href="/#"
           class="w-full sm:w-auto flex-1 relative group overflow-hidden rounded-lg border border-white/20 hover:border-white/40 transition-all duration-300 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3"
           target="_blank"
           rel="noopener"
-          aria-label="Become a partner with our company">
-          <span class="relative z-10 text-white font-medium text-sm sm:text-sm md:text-lg">Become a Partner</span>
-          <div class="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+          aria-label="Become a partner with our company"
+        >
+          <span
+            class="relative z-10 text-white font-medium text-sm sm:text-sm md:text-lg"
+            >Become a Partner</span
+          >
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+          </div>
         </Link>
       </div>
     </div>
