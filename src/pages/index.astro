@@ -8,18 +8,25 @@ import Promotion from "@/components/annoucement/Promotion.astro";
 import JobworkAnnoucer from "@/components/annoucement/JobworkAnnoucer.astro";
 import OurService from "@/components/blocks/OurService.astro";
 import TextAnnoucer from "./textAnnoucer.astro";
+import { getLatestAnnouncement } from "@/lib/announcementService";
 
 
 
-
-
+// Fetch the announcement text from Firestore
+let announcementText = "Welcome to JobWerk!"; // Default fallback
+try {
+  announcementText = await getLatestAnnouncement();
+  console.log("Fetched announcement:", announcementText);
+} catch (error) {
+  console.error("Error in index while fetching announcement:", error);
+}
 ---
 
 <Layout title="JobWerk | Co-own Mold with Multiply Your Molds | Divide The Cost">
  
   <main class="flex flex-col overflow-hidden">
    
-    <TextAnnoucer text="JobWerk™ is a revolutionary platform that allows manufacturers to co-own molds, multiply their molds, and divide the cost." />
+    <TextAnnoucer text={announcementText} />
     <Hero />
     <JobworkAnnoucer />
     <OurService />
