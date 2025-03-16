@@ -12,13 +12,16 @@ import { getLatestAnnouncement } from "@/lib/announcementService";
 
 
 
-// Fetch the announcement text from Firestore
-let announcementText = "Welcome to JobWerk!"; // Default fallback
+// Default announcement text
+let announcementText = "Welcome to JobWerk!";
+
+// Try to fetch the announcement text from Firestore
 try {
   announcementText = await getLatestAnnouncement();
   console.log("Fetched announcement:", announcementText);
 } catch (error) {
-  console.error("Error in index while fetching announcement:", error);
+  console.error("Error fetching announcement:", error);
+  // Keep using the default text
 }
 ---
 

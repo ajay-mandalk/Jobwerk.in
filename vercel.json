@@ -8,7 +8,16 @@
   "outputDirectory": "dist",
   "functions": {
     "api/*.ts": {
-      "runtime": "@vercel/node@2.0.0"
+      "runtime": "@vercel/node@2.0.0",
+      "env": {
+        "PUBLIC_FIREBASE_API_KEY": "AIzaSyB0V_JhWlZL-slnxPN3_TW5E6IidOJmW98",
+        "PUBLIC_FIREBASE_AUTH_DOMAIN": "jobwerk101.firebaseapp.com",
+        "PUBLIC_FIREBASE_PROJECT_ID": "jobwerk101",
+        "PUBLIC_FIREBASE_STORAGE_BUCKET": "jobwerk101.firebasestorage.app",
+        "PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "329058647489",
+        "PUBLIC_FIREBASE_APP_ID": "1:329058647489:web:30988ac9e215f399798340",
+        "PUBLIC_FIREBASE_MEASUREMENT_ID": "G-W41JYFG0WY"
+      }
     }
   }
 }
