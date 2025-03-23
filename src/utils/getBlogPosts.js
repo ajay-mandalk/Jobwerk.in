@@ -1,34 +1,71 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:1337/api/blog-posts"; // Corrected URL
+const API_URL = import.meta.env.STRAPI_URL 
+  ? `${import.meta.env.STRAPI_URL}/api/blog-posts`
+  : "http://localhost:1337/api/blog-posts";
 
-export async function getBlogPosts(limit = 25, offset = 0) { // Added pagination
+/**
+ * Fetches blog posts with pagination
+ * @param {number} limit - Number of posts to fetch
+ * @param {number} offset - Offset for pagination
+ * @returns {Promise<Object>} - Blog posts data
+ */
+export async function getBlogPosts(limit = 25, offset = 0) {
   try {
+    // Add timeout to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    
     const response = await axios.get(API_URL, {
       params: {
         populate: "*",
         limit: limit,
         start: offset,
       },
+      signal: controller.signal,
     });
-    return response.data; // Return the entire response data
+    
+    clearTimeout(timeoutId);
+    return response.data;
   } catch (error) {
-    console.error("Error fetching blog posts:", error);
-    return { data: [] }; // Return an empty array instead of [] to keep type consistency
+    if (axios.isCancel(error)) {
+      console.error("Request was cancelled due to timeout");
+    } else {
+      console.error("Error fetching blog posts:", error);
+    }
+    return { data: [] };
   }
 }
 
+/**
+ * Fetches a single blog post by slug
+ * @param {string} slug - Blog post slug
+ * @returns {Promise<Object|null>} - Blog post data or null
+ */
 export async function getBlogPostBySlug(slug) {
+  if (!slug) return null;
+  
   try {
+    // Add timeout to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    
     const response = await axios.get(API_URL, {
       params: {
         filters: { slug: { $eq: slug } },
         populate: "*",
       },
+      signal: controller.signal,
     });
-    return response.data.data[0];
+    
+    clearTimeout(timeoutId);
+    return response.data.data[0] || null;
   } catch (error) {
-    console.error("Error fetching blog post:", error);
+    if (axios.isCancel(error)) {
+      console.error("Request was cancelled due to timeout");
+    } else {
+      console.error("Error fetching blog post:", error);
+    }
     return null;
   }
 }

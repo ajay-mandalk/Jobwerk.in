@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
+import { type BaseHTMLProps } from '../../types/component-types';
 
-interface MarqueeProps {
+interface MarqueeProps extends BaseHTMLProps {
   className?: string;
   reverse?: boolean;
   pauseOnHover?: boolean;
