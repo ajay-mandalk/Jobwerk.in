@@ -2,63 +2,53 @@
 import Marquee from "@/components/ui/marquee";
 import { statusStyles, type Status } from '@/script/statusStyles';
 
-
-
-
-
-
-// You can later fetch this from your Supabase database
-const ongoingProjects: Array<{
+interface Project {
   id: number;
   name: string;
   status: Status;
   Qty?: number;
   rate?: number;
-}> = [
+}
 
-    {
-    "id": 1,
-    "name": "Plastic Die Mould, For Construction, Grade: H13",
-    "status": "Jobwerk",
-    "Qty": 150,
-    "rate": 2500
+const ongoingProjects: Project[] = [
+  {
+    id: 1,
+    name: "Plastic Die Mould, For Construction, Grade: H13",
+    status: "Jobwerk",
+    Qty: 150,
+    rate: 2500,
   },
   {
-    "id": 2,
-    "name": "Molding Hot Rolled Plastic Injection houseold Moulding Die",
-    "status": "Design Phase",
-  
+    id: 2,
+    name: "Molding Hot Rolled Plastic Injection houseold Moulding Die",
+    status: "Design Phase",
   },
   {
-    "id": 3,
-    "name": "Plastic Die And Mould, For Injection Moulding",
-    "status": "High Demand",
-    "Qty": 200,
- 
+    id: 3,
+    name: "Plastic Die And Mould, For Injection Moulding",
+    status: "High Demand",
+    Qty: 200,
   },
   {
-    "id": 4,
-    "name": "Cast Iron Plastic Dustbin Moulding Die, Packaging Type: Box",
-    "status": "Co-Own Mold",
-
+    id: 4,
+    name: "Cast Iron Plastic Dustbin Moulding Die, Packaging Type: Box",
+    status: "Co-Own Mold",
   },
   {
-    "id": 5,
-    "name": "Plastic Moulding Dies, Packaging Type: Box",
-    "status": "Jobwerk",
-    "Qty": 100,
-
+    id: 5,
+    name: "Plastic Moulding Dies, Packaging Type: Box",
+    status: "Jobwerk",
+    Qty: 100,
   },
   {
-    "id": 6,
-    "name": "Plastic Bottle Mould Die, Packaging Type: Box",
-    "status": "For Rent",
-    "Qty": 5000,
-    "rate": 3500
-  }
+    id: 6,
+    name: "Plastic Bottle Mould Die, Packaging Type: Box",
+    status: "For Rent",
+    Qty: 5000,
+    rate: 3500,
+  },
 ];
 ---
-
 <section class="relative bg-gray-100 dark:bg-gray-900">
   <div class="flex w-full lg:w-auto items-center justify-between">
     <Marquee className="[--duration:40s]" pauseOnHover={true} client:load>

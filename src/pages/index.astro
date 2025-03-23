@@ -9,8 +9,7 @@ import JobworkAnnoucer from "@/components/annoucement/JobworkAnnoucer.astro";
 import OurService from "@/components/blocks/OurService.astro";
 import TextAnnoucer from "./textAnnoucer.astro";
 import { getLatestAnnouncement } from "@/lib/announcementService";
-
-
+import ErrorBoundary from "@/components/ErrorBoundary.astro";
 
 // Default announcement text
 let announcementText = "Welcome to JobWerk!";
@@ -24,17 +23,15 @@ try {
   // Keep using the default text
 }
 ---
-
 <Layout title="JobWerk | Co-own Mold with Multiply Your Molds | Divide The Cost">
- 
   <main class="flex flex-col overflow-hidden">
-   
     <TextAnnoucer text={announcementText} />
     <Hero />
+    <ErrorBoundary fallback="Something went wrong with the JobworkAnnoucer component.">
     <JobworkAnnoucer />
+    </ErrorBoundary>
     <OurService />
     <VideoExplain />
-
     <Promotion />
     <SpeedInsights />
   </main>

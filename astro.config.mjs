@@ -25,5 +25,10 @@ export default defineConfig({
       domains: [],
     },
   }),
+
+  server: {
+    host: true, // Listen on all addresses
+    port: 4321, // Specify a port
+  },
  
 });
